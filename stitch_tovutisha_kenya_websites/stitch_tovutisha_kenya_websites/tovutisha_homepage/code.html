@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2d3133",
+                    "secondary-container": "#ffb55c",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "tertiary-fixed-dim": "#89d3d4",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d7dadc",
+                    "primary-fixed-dim": "#adc7f7",
+                    "primary-container": "#1a365d",
+                    "on-primary-fixed-variant": "#2d476f",
+                    "primary-fixed": "#d6e3ff",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#003d3e",
+                    "surface-container-high": "#e5e9eb",
+                    "error": "#ba1a1a",
+                    "outline": "#74777f",
+                    "on-primary-container": "#86a0cd",
+                    "background": "#f7fafc",
+                    "surface-bright": "#f7fafc",
+                    "secondary": "#875200",
+                    "on-secondary-container": "#744600",
+                    "surface-container": "#ebeef0",
+                    "on-tertiary-fixed": "#002020",
+                    "surface": "#f7fafc",
+                    "inverse-on-surface": "#eef1f3",
+                    "secondary-fixed": "#ffddba",
+                    "tertiary-fixed": "#a5eff0",
+                    "on-primary-fixed": "#001b3c",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e0e3e5",
+                    "outline-variant": "#c4c6cf",
+                    "on-surface": "#181c1e",
+                    "surface-tint": "#455f88",
+                    "tertiary": "#002526",
+                    "on-tertiary-container": "#61abac",
+                    "on-secondary-fixed-variant": "#673d00",
+                    "on-surface-variant": "#43474e",
+                    "primary": "#002045",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#adc7f7",
+                    "on-background": "#181c1e",
+                    "on-secondary-fixed": "#2b1700",
+                    "surface-variant": "#e0e3e5",
+                    "secondary-fixed-dim": "#ffb866",
+                    "surface-container-low": "#f1f4f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #002045 0%, #1a365d 100%);
+        }
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 z-50 glass-nav bg-slate-50/80 dark:bg-slate-950/80 w-full">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto w-full font-inter antialiased text-sm tracking-tight transition-all duration-300 ease-out">
+<div class="text-xl font-black tracking-tighter text-blue-900 dark:text-white uppercase">TOVUTISHA</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors" href="#">Schools</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors" href="#">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors" href="#">Apply</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors" href="#">Login</a>
+<div class="flex items-center ml-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">Get Started</button>
+</div>
+</div>
+<!-- Search Bar (on_right) -->
+<div class="flex items-center space-x-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-sm" data-icon="search">search</span>
+<input class="bg-surface-container border-none rounded-full py-1.5 pl-10 pr-4 text-xs focus:ring-2 focus:ring-secondary/50 w-48" placeholder="Search schools..." type="text"/>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="hero-gradient relative overflow-hidden py-24 md:py-32">
+<div class="max-w-7xl mx-auto px-8 relative z-10 grid md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-7 space-y-8">
+<div class="inline-flex items-center space-x-2 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-secondary text-xs font-bold tracking-widest uppercase">MMUST Outreach Initiative</span>
+</div>
+<h1 class="text-white text-5xl md:text-7xl font-black tracking-tight leading-[1.1]">
+                        Empowering Kenyan Schools with a Digital Presence.
+                    </h1>
+<p class="text-on-primary-container text-xl md:text-2xl font-medium max-w-2xl leading-relaxed">
+                        Affordable, professional websites for only KES 5,000/year. Bridging the digital divide across 47 counties.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-secondary-container text-on-secondary-fixed font-bold py-4 px-10 rounded-lg hover:shadow-2xl transition-all text-lg">Apply for a Website</button>
+<button class="bg-white/10 text-white backdrop-blur-md border border-white/20 font-bold py-4 px-10 rounded-lg hover:bg-white/20 transition-all text-lg">Learn More</button>
+</div>
+</div>
+<div class="md:col-span-5 relative hidden md:block">
+<div class="aspect-square bg-white/5 rounded-3xl overflow-hidden backdrop-blur-xl border border-white/10 p-4 transform rotate-3 hover:rotate-0 transition-transform duration-700">
+<img class="w-full h-full object-cover rounded-2xl shadow-inner" data-alt="cheerful kenyan students in a modern computer lab smiling while learning on laptops with bright natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9L-BsPxbpGNXPodJa_8P6C1hJxweQdtJdrvDB6zW8v0AiZzgYwv0ERYvFISmsSq5B91jveLz7jsGj7GiiqCuvW-qlgPCb-_qi85O8W9VP2wGekqOcnA_v57sBFy3nhfvLWVGJH9jXds0CkWtwvYeE3-gVJQxb1fiE2QXqEhDg5pEoGl_77krNNUxsXBcGTC2HA7lkSkErXVOvQhKHjBHUGpxhj0Xv9XfmRnBoqYn6ay5063LoLOA0atMz0nB3I4RWZ-6mHcgDMOw"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-surface-container-lowest p-6 rounded-2xl shadow-xl space-y-2 max-w-[240px]">
+<p class="text-primary font-bold text-lg leading-tight">Digital Transformation</p>
+<p class="text-on-surface-variant text-sm">Join over 150 schools already online with TOVUTISHA.</p>
+</div>
+</div>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary/20 blur-[120px] rounded-full"></div>
+</section>
+<!-- Stats Section -->
+<section class="bg-surface-container-low py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="flex flex-col items-center md:items-start space-y-2 p-8 bg-surface-container-lowest rounded-xl shadow-sm">
+<span class="text-primary text-5xl font-black tracking-tighter">150+</span>
+<span class="text-on-surface-variant text-sm font-bold uppercase tracking-widest">Schools</span>
+</div>
+<div class="flex flex-col items-center md:items-start space-y-2 p-8 bg-surface-container-lowest rounded-xl shadow-sm">
+<span class="text-secondary text-5xl font-black tracking-tighter">47</span>
+<span class="text-on-surface-variant text-sm font-bold uppercase tracking-widest">Counties Covered</span>
+</div>
+<div class="flex flex-col items-center md:items-start space-y-2 p-8 bg-surface-container-lowest rounded-xl shadow-sm">
+<span class="text-primary text-5xl font-black tracking-tighter">5,000+</span>
+<span class="text-on-surface-variant text-sm font-bold uppercase tracking-widest">Students Reached</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Schools Section (Carousel Pattern) -->
+<section class="py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-2xl">
+<h2 class="text-3xl md:text-4xl font-black text-primary tracking-tight mb-4 uppercase">Featured Schools</h2>
+<p class="text-on-surface-variant text-lg">Explore the digital homes of Kenya's premier academic institutions built on the TOVUTISHA platform.</p>
+</div>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center hover:shadow-lg transition-all">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- School Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+<div class="aspect-[4/3] relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="front entrance of a prestigious african high school with manicured lawns and blue sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnUeVjRZLLoT6XIJ2xkzmG9ixGaO_GEjTUC9qPuEHDEiJybrIUi5GtuJ5Vc5rATs-1zYxH1hg9omGs5xuZNhGty-G4ebNlhxrChsbFCu8P6TGsoUSSFa1edSeEm97_mFAn7qC6bo2_fSKv7ln0dKtQy91Gfm1PVdXdEP7BHLl8XqwrQ4Ju1xjvbXJ5Fc4fWCiHZQN6Kc76c5mygCU5eZ2FKz6QD5WX7lQKwHsn5DwCcbMKH3VCZHthOjZ5Ibb7H1MBV-X8kfO0Ua0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center space-x-3">
+<div class="w-12 h-12 bg-white rounded-lg p-1 shadow-md">
+<img class="w-full h-full object-contain" data-alt="heraldic shield logo icon for kakamega high school" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVV4sjGUHeX4GVJ4AItESrN-iE4cTxCwhowgH2ssrIaxySs3mdaeEHEGCvhtzi9z2vsUI0hBdMDYqfxvlBiIEt86aXu_6Gb7_9cKXC18O92oRS1M2WbulSGTNokS80KqGFVJgadFMrTnoZFksOXheCCDRyQp9ulTcLUBqQ4qzM4uV444-IUjwbUUJ7T84gswg8-4YlaBoTKKnKvNDq-Mzah8snsOUXWIQgegUeDpIsvnKHQOZYPqlLtoYeuPMQyOtF3ZeQSt8VT1s"/>
+</div>
+<span class="text-white font-bold tracking-tight">Kakamega High School</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<p class="text-on-surface-variant text-sm leading-relaxed">Setting standards in academic and co-curricular excellence through digital integration.</p>
+<a class="inline-flex items-center text-secondary font-bold hover:gap-2 transition-all" href="#">
+                                View Website
+                                <span class="material-symbols-outlined ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- School Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+<div class="aspect-[4/3] relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern administrative block of a girls high school in kenya with elegant architectural design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9nZl7eHmiCYwAJRUs6zUd-E9Y2SJLdmJKLmfiD23Tb_JoXOaeoNFKNP7KJ09bPsjHCgHCuzG3rFiyxcMBm1KhaUn9jH9Z08p-OLe3_PX66cr-5__b4ZCfLydDQ1tpJ0nDZHDAZsbp2aExm3DcNQpB86aUsgie9xs5oH-Xbr6Quueg0Cde4wBJvGuCGeNaDNzfi-YNBcE4CGVO7Ohig4Bdao5_Gb9fWGjBmERjCTSD_zbN5Q7XF40dHoYhH2wnDhh2r2QJ6Nz4W-o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center space-x-3">
+<div class="w-12 h-12 bg-white rounded-lg p-1 shadow-md">
+<img class="w-full h-full object-contain" data-alt="official circular gold logo for moi girls eldoret" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9jaXTMW3qFstyVFgGDy06RbDSS6nQHjjTJhrbxX_H_h92EPe6eL97kiczUTnqlrYFlAQZuHFTUaJnGI6YoHJ0JZ4m_t3_igrMshGDZgyWPEWqaL8kfr-hzchuWuhlQyKvNVqKeCcsDoaAelac7iqP9mSPCB6eOuuMzItZbo1eedWk8UTd95M2E4tBSFVO77A5CcApt3jj0PpIue_OuBo3AEbqwDo7ov3BP-xbST7W2bDDC2mgm362SIR2Ih6APcQrLWRJTJHsdiI"/>
+</div>
+<span class="text-white font-bold tracking-tight">Moi Girls Eldoret</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<p class="text-on-surface-variant text-sm leading-relaxed">A hub of excellence for the girl child, now connected to the world via TOVUTISHA.</p>
+<a class="inline-flex items-center text-secondary font-bold hover:gap-2 transition-all" href="#">
+                                View Website
+                                <span class="material-symbols-outlined ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- School Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
+<div class="aspect-[4/3] relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Exterior of a Kenyan national school auditorium under bright sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHoZ06eOZzLNrcx_rg9l-kHLY4y-yPvd52pfxvSNO5G1BT_SfueVBDMEFkUqGnZpw9yHxhK6PgFppV9nkfR388yGDCeOda3RDO8KHxbEzoT-TajZBO3iG9-vy3FVzZGPVkd8qD3p-BNdTPM-W7hlnVAWJkYJVUbCASGoQApcDFrxq2rP1ikEprIqdqxaIQfbiM1k7899_xisFBpXsHqLKmRMPiVcAuPTnvlSGJW79ViwM8miIWyEBfMj8CKF1UaAy9unUbu7952Ls"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 flex items-center space-x-3">
+<div class="w-12 h-12 bg-white rounded-lg p-1 shadow-md">
+<img class="w-full h-full object-contain" data-alt="minimalist logo for maseno school" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCobJpauKGUkML9_vZaWJHlyzqlZMQ1shsLyIPLVI-GSuk8RQZ1llTgSBsRQuzxAc_0lNGSIP0ItM1TTUSBUiEa6ib7_pGBFGQCKU1pL_Eq5mVmEKty_Zmzd-aPgwPaIXb-KT3lMohdG5noCkE4zD8yIGhnV4pK7ZYCEslVlfhdUR8ufglXfu1FlyKRpKpjls0Zgu8YMmT206GpD_sfyVtadeDidaUA2X1CKgrtRs1qTQXzR3yZrBFG81FnlDgYA8Ad1LT6kIkEzu4"/>
+</div>
+<span class="text-white font-bold tracking-tight">Maseno School</span>
+</div>
+</div>
+<div class="p-8 space-y-4">
+<p class="text-on-surface-variant text-sm leading-relaxed">Pioneering education in Western Kenya with a robust and interactive digital portal.</p>
+<a class="inline-flex items-center text-secondary font-bold hover:gap-2 transition-all" href="#">
+                                View Website
+                                <span class="material-symbols-outlined ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Partners Section -->
+<section class="py-16 bg-surface-container-high">
+<div class="max-w-7xl mx-auto px-8">
+<p class="text-center text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-10">Strategic Partners &amp; Visionaries</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="flex items-center space-x-4">
+<div class="h-16 w-16 bg-white rounded-full flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="school">school</span>
+</div>
+<span class="font-bold text-xl text-primary tracking-tighter">MMUST Partner</span>
+</div>
+<div class="flex items-center space-x-4">
+<div class="h-16 w-16 bg-white rounded-full flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<span class="font-bold text-xl text-primary tracking-tighter">KoTDA Vision 2030</span>
+</div>
+<div class="flex items-center space-x-4">
+<div class="h-16 w-16 bg-white rounded-full flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-tertiary-container text-3xl" data-icon="account_balance">account_balance</span>
+</div>
+<span class="font-bold text-xl text-primary tracking-tighter">Ministry of Education</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest News -->
+<section class="py-24 bg-background">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex items-center space-x-4 mb-16">
+<div class="h-[2px] w-12 bg-secondary"></div>
+<h2 class="text-3xl font-black text-primary tracking-tight uppercase">Latest Project Updates</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- News Card 1 -->
+<div class="group cursor-pointer">
+<div class="mb-6 overflow-hidden rounded-xl">
+<img class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close up of a group of hands from different people placed together in a circle signifying teamwork" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRHKEgArVPI02XL4Fr7kNPBZM-zdMfj5-fNLBLYy2nVqL1hja__oWe3XyLgJ6JrLNPpk5f1opzmc_OOhQSttQoihCJpTxUZB4k92P53_Y7VgmJBdH-FWPjFP7pxfAlA9x4ZZEJFSwkrDay3i5nbgvVMgcv5k3g1TQySgYpBQ0LPl4Zmd3qHBH1fgdqGtqyN56nlZj49gZphxr_UfYfh7TY5vuNIFfYptveiJy476GZ5iBRCC1PzGkaH0_nQiP69xNE16H3YXZ5qsg"/>
+</div>
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-3">Announcement</span>
+<h3 class="text-xl font-bold text-primary leading-tight mb-4 group-hover:text-secondary transition-colors">Phase 3 Launch: 50 New Schools Enrolled</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed line-clamp-2">The MMUST Outreach team has successfully onboarded 50 new schools from the coastal region this month.</p>
+<div class="mt-6 flex items-center space-x-4">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span>
+</div>
+<span class="text-xs text-outline font-medium">October 24, 2023</span>
+</div>
+</div>
+<!-- News Card 2 -->
+<div class="group cursor-pointer">
+<div class="mb-6 overflow-hidden rounded-xl">
+<img class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" data-alt="a large lecture hall with many students attending a workshop about digital literacy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU2lVJT8sjn1i5hgQAzOaHmc9bYqCSIL-5Hyax7tp3oHCcwJ1iXyhQIz8bdaGZd-27-24upyakKDlp1_t_CXXzpKJAswfqAgFb4tMLQYXPHW4uisxQglB8_x5Bys1JUmeoXec35Ka4lB2_P5OzadAdXMvYhJK5dgm0M-aLGVXnpK7XQPynlqzp6BWxliLhxSECBMVUDkyQTqXGeVD5yEZGpMhy5X_DycK77_fH_13njlIAn5qZIHwK24WokpahOjfnGe4LeWeI8kM"/>
+</div>
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-3">Workshop</span>
+<h3 class="text-xl font-bold text-primary leading-tight mb-4 group-hover:text-secondary transition-colors">Digital Literacy Training for Teachers</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed line-clamp-2">Over 200 teachers participated in our latest webinar on content management and digital pedagogy.</p>
+<div class="mt-6 flex items-center space-x-4">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span>
+</div>
+<span class="text-xs text-outline font-medium">October 12, 2023</span>
+</div>
+</div>
+<!-- News Card 3 -->
+<div class="group cursor-pointer">
+<div class="mb-6 overflow-hidden rounded-xl">
+<img class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" data-alt="clean top-down view of a designer working on a modern educational website layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1y5tu8SZSPlQQkBOqSWZBzhZkeUwG1tFD4ZDC9lzAjO9mPhBKPUaNnUoQ_JnE3X6Dw82jJKxzKf29QIyiwuJ5teq2cnQzvswLMfXoSVKZJodeumX9Urf8HeLHlEaizfGD3D9JlxV7gdSVveausEaKQBxkfWLEErL1RYmXzTnaj3M-FgNkInvghK6dWxE2KrsCHD4-UIhOkwdqaNxspqh9h6Sh1ZDvdgnrxtj6N2SPR_yVyr2DZ9yTIyweuqR-Hh8Tg7maac1vkBg"/>
+</div>
+<span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-3">Feature Update</span>
+<h3 class="text-xl font-bold text-primary leading-tight mb-4 group-hover:text-secondary transition-colors">New Portal Templates Released</h3>
+<h3 class="text-xl font-bold text-primary leading-tight mb-4 group-hover:text-secondary transition-colors"></h3>
+<p class="text-on-surface-variant text-sm leading-relaxed line-clamp-2">We've added three new high-end editorial templates for high schools focusing on student portfolios.</p>
+<div class="mt-6 flex items-center space-x-4">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span>
+</div>
+<span class="text-xs text-outline font-medium">September 28, 2023</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-900 border-t-0">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-12 py-16 w-full max-w-7xl mx-auto">
+<div class="space-y-6">
+<div class="font-bold text-blue-900 dark:text-blue-200 text-2xl uppercase tracking-tighter">TOVUTISHA</div>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-xs">
+                    Bridging the academic digital divide through professional, accessible, and high-quality web solutions for Kenyan schools.
+                </p>
+<div class="flex space-x-4 opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="facebook">social_leaderboard</span>
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="alternate_email">alternate_email</span>
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="language">language</span>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="text-xs font-medium uppercase tracking-widest text-blue-900 dark:text-blue-100">Partnership &amp; Vision</h4>
+<nav class="flex flex-col space-y-4">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">MMUST Partner</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">KoTDA Vision 2030</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="text-xs font-medium uppercase tracking-widest text-blue-900 dark:text-blue-100">Legal &amp; Support</h4>
+<nav class="flex flex-col space-y-4">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">Privacy Policy</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">Terms of Service</a>
+</nav>
+<div class="pt-8">
+<p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">© 2024 TOVUTISHA. Empowering Kenyan Education.</p>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

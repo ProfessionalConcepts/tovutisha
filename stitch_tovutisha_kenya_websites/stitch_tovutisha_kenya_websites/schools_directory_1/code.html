@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TOVUTISHA | Schools Directory</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#f7f9fb",
+                        "on-primary-fixed": "#001b3c",
+                        "secondary-fixed-dim": "#84d999",
+                        "surface-variant": "#e0e3e5",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c3c6d1",
+                        "secondary-fixed": "#9ff6b4",
+                        "tertiary-container": "#2a343f",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "inverse-primary": "#a7c8ff",
+                        "background": "#f7f9fb",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-container": "#799dd6",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "secondary-container": "#9ff6b4",
+                        "on-secondary-container": "#19733e",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#00210c",
+                        "on-tertiary-fixed-variant": "#3e4853",
+                        "on-tertiary-container": "#929caa",
+                        "surface-container-highest": "#e0e3e5",
+                        "tertiary": "#151f29",
+                        "on-error": "#ffffff",
+                        "on-background": "#191c1e",
+                        "secondary": "#0f6d39",
+                        "surface-container": "#eceef0",
+                        "surface-tint": "#3a5f94",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#d9e3f2",
+                        "on-tertiary-fixed": "#131c27",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#003366",
+                        "tertiary-fixed-dim": "#bdc7d6",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface-variant": "#43474f",
+                        "on-surface": "#191c1e",
+                        "surface-dim": "#d8dadc",
+                        "primary": "#001e40",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "on-secondary-fixed-variant": "#005228",
+                        "outline": "#737780"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-effect { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md flex justify-between items-center px-8 py-3 w-full max-w-full transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-12">
+<span class="text-2xl font-extrabold font-manrope bg-gradient-to-br from-blue-900 to-blue-700 bg-clip-text text-transparent">TOVUTISHA</span>
+<div class="hidden md:flex gap-8 items-center font-manrope tracking-tight text-sm font-semibold">
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-blue-800 transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg px-2 py-1" href="#">Curriculum</a>
+<a class="text-slate-500 dark:text-slate-400 font-medium hover:text-blue-800 transition-colors hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg px-2 py-1" href="#">Analytics</a>
+<a class="text-blue-900 dark:text-blue-100 border-b-2 border-emerald-700 pb-1" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low rounded-full border-none focus:ring-2 focus:ring-secondary/30 w-64 text-sm transition-all" placeholder="Search resources..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-lg">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-200/50 rounded-lg">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-fixed overflow-hidden">
+<img alt="Administrator Profile" data-alt="Close-up portrait of a professional male administrator in a light blue shirt, clean studio background, professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcnjDUo5eqEsdgC3f1ejkTRW5DVFqlrWf1kAsQ2PGYhakclHqW6BzVghUZj_hMcv7tw9tHpKaOKujkCTwEmb-KQ0LjiGNETfNu9DFLvyBqZxLpQKk7QCRoyJ75ghPvLrESvQrv8c0xcfEyCOBoPS9rWofEzVa0F8M25RezXnBhwApk4vywBYFw9951yMYNfIfylGx2_onjyKnPBRRwo3MJ9mVr6L6oRR1UPknvTdSgsTcuQ_WArAIxySESkwus_fOfLcrzu0iRr8g"/>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-12 px-8 max-w-screen-2xl mx-auto">
+<!-- Hero Section & Search Header -->
+<header class="mb-12">
+<h1 class="font-headline text-5xl font-extrabold text-primary mb-4 tracking-tight">Schools Directory</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                Empowering Kenyan education through visibility. Explore over 30,000 institutions across the 47 counties of the republic.
+            </p>
+</header>
+<!-- Search & Filter Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Filter Panel -->
+<aside class="lg:col-span-3 space-y-6 sticky top-28">
+<div class="bg-surface-container-low p-6 rounded-xl space-y-8">
+<div>
+<label class="block text-primary font-bold text-sm uppercase tracking-wider mb-4">Location</label>
+<select class="w-full bg-surface-container-lowest border-none rounded-lg text-on-surface shadow-sm focus:ring-2 focus:ring-secondary/50 py-3">
+<option>All 47 Counties</option>
+<option>Nairobi</option>
+<option>Mombasa</option>
+<option>Kisumu</option>
+<option>Nakuru</option>
+<option>Uasin Gishu</option>
+<option>Kiambu</option>
+<option>Machakos</option>
+</select>
+</div>
+<div>
+<label class="block text-primary font-bold text-sm uppercase tracking-wider mb-4">Education Level</label>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Primary Schools</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Secondary Schools</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="text-on-surface-variant group-hover:text-primary transition-colors">Higher Learning</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block text-primary font-bold text-sm uppercase tracking-wider mb-4">Institution Status</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-secondary text-on-secondary text-sm font-semibold">Public</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors">Private</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-highest text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors">International</button>
+</div>
+</div>
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 rounded-lg font-bold text-sm shadow-md hover:opacity-90 transition-opacity">
+                        Apply Filters
+                    </button>
+</div>
+<!-- Featured Highlight -->
+<div class="bg-primary-container text-on-primary-container p-6 rounded-xl relative overflow-hidden">
+<div class="relative z-10">
+<span class="inline-block px-2 py-1 bg-secondary text-on-secondary text-[10px] font-bold uppercase tracking-widest rounded mb-3">Spotlight</span>
+<h4 class="font-headline font-bold text-lg mb-2">Academic Excellence</h4>
+<p class="text-sm opacity-80 mb-4">Discover institutions ranked top in the latest KCSE performance indices.</p>
+<a class="text-secondary-fixed font-bold text-sm flex items-center gap-2" href="#">View Rankings <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span></a>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" data-icon="school">school</span>
+</div>
+</div>
+</aside>
+<!-- Results Content -->
+<div class="lg:col-span-9 space-y-8">
+<!-- Toggle View Controls -->
+<div class="flex justify-between items-center bg-surface-container-low p-2 rounded-xl">
+<div class="flex gap-1 p-1">
+<button class="flex items-center gap-2 px-6 py-2 rounded-lg bg-surface-container-lowest text-primary font-bold shadow-sm">
+<span class="material-symbols-outlined text-xl" data-icon="grid_view">grid_view</span>
+                            Grid View
+                        </button>
+<button class="flex items-center gap-2 px-6 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="map">map</span>
+                            Map View
+                        </button>
+</div>
+<span class="text-sm text-on-surface-variant font-medium pr-4">Showing 1,248 Institutions</span>
+</div>
+<!-- Bento Grid of Schools -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- School Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group border-none">
+<div class="h-32 bg-slate-100 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="Classic red brick university architecture with green lawn in foreground, architectural photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjff8mVnNi7VDsvnPksmNgyua_0BbqOEkqUi-353sP5VHvDZ_PHJEuoChSI_Y2e3sdEPgBHUP7_nmdnimKL0fKOXuzGfi0RV2HrWQpoD6UoblcdDvjBNj4hDDSFFxK0OPBJzSG8sn0pl7y803Knw0K7NCoq9223u2hVA1PzaYgZcIuX09wCx1TYMi5pl4x9ss09XMTNSUhc7fNAqOhhsWho0OboGNRmEvP_y4QxONXA25cEoIOKMVij5PvXqIQHYhWgo0-aXlFdPw"/>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold shadow-sm">Public</div>
+</div>
+<div class="p-6 -mt-8 relative z-10">
+<div class="w-16 h-16 rounded-xl bg-white shadow-lg p-2 mb-4 overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Professional shield-style academic logo with books and torch symbols, clean minimalist design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzHiCWTuySGN9LlZf8sSngBc2UZ2UscN4t4nbNM5TKkmEX7c9H0O5hNP0uNcy8eJwfRqKwNpNh5Mh3WoiG6IrVtyWNf4gJ-PQ7vXQGcjqyVn-J2Lm5KZhEgebeTOMO4YSG0XymKLIEDrPwTt4Wsir6LRACRnmTiLi0el0iC9WEfjRLJ77TYFkm1WDyBJsFCXpxhzWzsMY_CaUO0bJs2hOTO1knFTEEgNbGq-2KZBtmPqiLna2HNlMJYNNzXOKPTf9aqhv4J2Qc3Kk"/>
+</div>
+<h3 class="font-headline font-bold text-xl text-primary mb-1">Alliance High School</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                                Kiambu County
+                            </div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-400"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+<a class="text-primary font-bold text-sm flex items-center gap-1 group-hover:text-secondary transition-colors" href="#">
+                                    Visit Website
+                                    <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- School Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group border-none">
+<div class="h-32 bg-slate-100 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="Modern high school library with large windows and wooden tables, bright natural lighting, educational setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPFQRzka1_d2kthl7Iq5ptpXADByKYJwIXAEAD0lt2yD0DhnEqtXs9mNf7qVopszO1gAIEdpbqcxuceM99qTnrf6mjM1zrH0DJmPOa_aAvYy_UkSPfn4JLcsfpD-GG8j7-hIyBqs9k9S9C6f9A0JXn3aCZQMiyum7uve00qG5nSNbectcWh4lYb9K8b0mnr4np9V1YPSgryTzc_yYSefVnWGkhymZHn5FMzwLa_C6sawaASALcdlO__BjZHKzqaMeprX6USkDiMKQ"/>
+<div class="absolute top-4 right-4 bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-xs font-bold shadow-sm">International</div>
+</div>
+<div class="p-6 -mt-8 relative z-10">
+<div class="w-16 h-16 rounded-xl bg-white shadow-lg p-2 mb-4 overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Minimalist geometric logo icon for a modern education institution, blue and emerald color scheme" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm92nIiAf-3fBVOojAuo4lWyjAMGXMF8HTv5JBEE3mrGIdnAbTv994bxATi-gMY70Siwoq0fvvhMVAGe4ASeSKWAu9elRdcZuN3HUPjeueHO2jiKD2gZmOi-ekeMMhq95qD3iuuk8fF1tI4QgvK0dgN_jJ1Isn9fshN46uZXeCtCnoP741ETeKkslqZc-K1L9U8fohpJtVIIcS7o_Y8FjYCBMoUSox_2Ft77bYGYtFT_BCGlcPhsRYKeutPa7L7RMfwLXUXdY8xfg"/>
+</div>
+<h3 class="font-headline font-bold text-xl text-primary mb-1">Brookhouse School</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                                Nairobi County
+                            </div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">+8</div>
+</div>
+<a class="text-primary font-bold text-sm flex items-center gap-1 group-hover:text-secondary transition-colors" href="#">
+                                    Visit Website
+                                    <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- School Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group border-none">
+<div class="h-32 bg-slate-100 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="Sunny primary school classroom with colorful posters and wooden chairs, cheerful atmosphere, bright lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBEpLFh_qaK_qIKDh31UVjiBjamic6AKBZGocMDUjpcVJwYRnPOycqiKP05_MKoUgvnmGW-O1MqP008a22fQjZ6Ih2XFMlelK1fW-8e5JkwhklLu-tVXjSofK0Jg3HWpYwCAcQ7cpZM_Bm2drMyh19ODkv_MMriJQXZE9WuoWJ-h1x9xRibwOpmz_rMoSvnw17zgkpT1nh-9jfrEw7dIfX_oD6nWtCs2clqID8Ic9z2BW_VWLTFbeOZBDCGl2G7X0zhCjWs6oEZU0"/>
+<div class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold shadow-sm">Public</div>
+</div>
+<div class="p-6 -mt-8 relative z-10">
+<div class="w-16 h-16 rounded-xl bg-white shadow-lg p-2 mb-4 overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Heraldic lion logo for a traditional school, navy and gold colors, prestigious feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Rj0XF7ofOfN8Oai17YzFxdZpw9UeHJ7yrSvApsejVwfeOb_k66ae7vMyebaytoJfMQX87TTrZDzj-Y7CLKXkSo1zP1pMT56vTT9RUcI00DUgC2MlLAghp5GdhUXDBkaKfE6UMcGiBmr9C9Vn7XUgHZFXx9pIRLR4Kb5CnnvSJagw0tVEHjh2QodCYvuD4j20QP95iARumR_OTN5LkRz-3dS0VUQEB90rH-ESx41NjGW0AWDkNVAm7JVYqZf1_ssCw3TvvXomlME"/>
+</div>
+<h3 class="font-headline font-bold text-xl text-primary mb-1">Moi Forces Academy</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                                Mombasa County
+                            </div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">+25</div>
+</div>
+<a class="text-primary font-bold text-sm flex items-center gap-1 group-hover:text-secondary transition-colors" href="#">
+                                    Visit Website
+                                    <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- School Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all group border-none">
+<div class="h-32 bg-slate-100 relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="Modern concrete university facade with large glass panels, overcast sky, professional architectural photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ4VNLIcWBEGYBPYLKQDSJ5RQuXNw3gYTmQHV0yTV1shf8LUVj5kAZH3-oJicoue7ZG-lJN71xuO07yLLycxzwceuYq7SgzkGAJNwIE1F--8zg9yRZVVZSMgkc6xPofZbfjGlyldLful-K92CibdP2G29geAvxAFrD1fo4ggFwCmE1rqE3x-n1X9zr_pE8tHPWbzjrjDd-fY8--nUKQNBHpQzpoN_UcFqfD-H2ymxebS0GbYuU5QewbGhf1vkHwC0IlECp2VgQVxM"/>
+<div class="absolute top-4 right-4 bg-surface-container-highest text-on-surface-variant px-3 py-1 rounded-full text-xs font-bold shadow-sm">Private</div>
+</div>
+<div class="p-6 -mt-8 relative z-10">
+<div class="w-16 h-16 rounded-xl bg-white shadow-lg p-2 mb-4 overflow-hidden">
+<img class="w-full h-full object-contain" data-alt="Academic logo featuring an open book and a star, clean modern lines, teal and charcoal colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDKNF4EUsDWn157-iodfS0F2x0F3cWPqTmUs3rfKecxXjbW8vrscFDwt9MQRCl6HKL_ZKLzQGcFFyDaO__aw8yP5Kuw9ObsL08WJD5ifozQJKecpLTJS0Bb6u0gLCetrPceo82mhI9gkk_KgpxD6kEukgh0q3M9rr7mERxRK0CwlIQTZWBDzAvQeaasGz8J1j8N5e4Y8VZqlAHIh8nOZLRMLzZvgwe7ijcVWQfKKKYGVkCL5k59B-qDP84QwjxIJPOSD75ZooH4ic"/>
+</div>
+<h3 class="font-headline font-bold text-xl text-primary mb-1">Strathmore School</h3>
+<div class="flex items-center gap-2 text-on-surface-variant text-sm mb-4">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+                                Nairobi County
+                            </div>
+<div class="flex items-center justify-between mt-6">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">+18</div>
+</div>
+<a class="text-primary font-bold text-sm flex items-center gap-1 group-hover:text-secondary transition-colors" href="#">
+                                    Visit Website
+                                    <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Map Integration Placeholder (Bento Style) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col xl:flex-row min-h-[300px]">
+<div class="xl:w-1/2 p-8 flex flex-col justify-center">
+<h3 class="font-headline font-bold text-2xl text-primary mb-3">Geographic Insights</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">
+                                Use our interactive map to visualize school density and proximity. Filter by region to find the best educational facilities near you.
+                            </p>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+</div>
+<div>
+<div class="font-bold text-sm">Real-time Navigation</div>
+<div class="text-xs text-on-surface-variant">Get directions to any school instantly</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</div>
+<div>
+<div class="font-bold text-sm">Cluster Mapping</div>
+<div class="text-xs text-on-surface-variant">View school clusters and educational hubs</div>
+</div>
+</div>
+</div>
+<button class="mt-8 flex items-center gap-2 text-secondary font-bold text-sm group">
+                                Open Interactive Map
+                                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_right_alt">arrow_right_alt</span>
+</button>
+</div>
+<div class="xl:w-1/2 h-full bg-surface-container-high relative min-h-[200px]">
+<img class="w-full h-full object-cover grayscale opacity-50" data-alt="Top-down satellite view of a city grid, muted colors, aesthetic map background" data-location="Nairobi, Kenya" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP1ESF9OVhytMxuBBkNFXsYBPLljC3dl6cSoFWYyyIlLSY46qf2oirPgxaSDHLjyZXwLYvpLcsj6vLmHK-1w9gkVxZG7ex1IT-0NSm3-jhmQPYZJ2aoo7dJEoAr9oLyr2H7kYaa7GhBd97mQ_gSStvSOaCwbnHKsRjo5NWFqcCC0boZdnfj9qzyYWGWxIKVoOF1dShvmdh_Vo3n8fuhjmDVBRYgvvajkIn-YjOY0wuIO1FvFJz0ulcvEomoN48blz3-_EbXKJC314"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-white px-3 py-2 rounded-lg shadow-xl text-xs font-bold whitespace-nowrap">
+                                        Alliance High School
+                                        <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white rotate-45"></div>
+</div>
+<span class="material-symbols-outlined text-4xl text-secondary animate-bounce" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex justify-center mt-12">
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high transition-colors border border-outline-variant/20">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high transition-colors border border-outline-variant/20">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-on-surface-variant">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-high transition-colors border border-outline-variant/20">42</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-slate-200/30 bg-slate-50 dark:bg-slate-950 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-2">
+<span class="font-manrope font-bold text-slate-400">TOVUTISHA</span>
+<p class="font-inter text-xs tracking-wide uppercase text-blue-900 dark:text-blue-200">© 2024 TOVUTISHA. All Rights Reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-inter text-xs tracking-wide uppercase">
+<a class="text-slate-500 hover:text-emerald-600 transition-colors underline decoration-emerald-500 underline-offset-4" href="#">MMUST Partnership</a>
+<a class="text-slate-500 hover:text-emerald-600 transition-colors underline decoration-emerald-500 underline-offset-4" href="#">KoTDA Tech Hub</a>
+<a class="text-slate-500 hover:text-emerald-600 transition-colors underline decoration-emerald-500 underline-offset-4" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-emerald-600 transition-colors underline decoration-emerald-500 underline-offset-4" href="#">Data Governance</a>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container text-primary hover:bg-secondary hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="language">language</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container text-primary hover:bg-secondary hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="public">public</span>
+</button>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,32 @@
+# PRD: TOVUTISHA - Affordable Kenyan School Websites
+
+## Project Overview
+TOVUTISHA (Kiswahili for "Website-ify") is a MMUST outreach project providing affordable websites to Kenyan schools for a flat fee of KES 5,000 per year. The platform handles school applications, manual admin approval, and automated school website generation.
+
+## Core Principles
+- **Affordability:** KES 5,000/year flat fee.
+- **Simplicity:** No online payments; manual offline billing and approval.
+- **Identity:** Mandatory backlinks to MMUST and KoTDA.
+- **Accessibility:** Searchable directory of Kenyan schools by county and type.
+
+## Key Functional Requirements
+1. **Public Application Flow:** Schools apply via a form (47 counties).
+2. **Admin Review:** Super Admins approve/reject applications manually.
+3. **Automated Site Generation:** Approval triggers a subdomain (`school.tovutisha.mmust.ac.ke`) and a standardized template.
+4. **School Admin Portal:** Approved schools manage their news, events, and documents.
+5. **Directory:** A public-facing searchable database of all incorporated schools.
+
+## Technical Stack
+- **Frontend:** Next.js 14, Tailwind CSS, Shadcn UI, Lucide Icons.
+- **Backend:** Node.js, Express, Prisma (PostgreSQL), JWT.
+- **Maps:** OpenStreetMap/Leaflet for school locations.
+
+## NO-GO Zones
+- No M-Pesa or online payment integrations.
+- No automated invoicing.
+- No subscription management code.
+
+## Visual Identity
+- **Primary Colors:** MMUST Blue/Gold or a professional educational palette (Navy & Teal).
+- **Typography:** Clean, sans-serif (Inter or Roboto).
+- **Components:** High-contrast, mobile-first, and accessible.

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Login - TOVUTISHA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                    "primary": "#002045",
+                    "secondary": "#875200",
+                    "background": "#f7fafc",
+                    "surface": "#ffffff"
+                }
+              }
+            }
+          }
+    </script>
+    <style>
+        .hero-gradient { background: linear-gradient(135deg, #002045 0%, #1a365d 100%); }
+    </style>
+</head>
+<body class="bg-background font-inter min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full bg-surface rounded-2xl shadow-2xl overflow-hidden border border-slate-100">
+        <div class="hero-gradient p-8 text-center">
+            <h1 class="text-2xl font-black text-white tracking-tighter uppercase">TOVUTISHA</h1>
+            <p class="text-blue-100 text-sm mt-2 font-medium">Academic Portal Entrance</p>
+        </div>
+        <div class="p-8 space-y-6">
+            <div class="space-y-2">
+                <label class="text-xs font-bold uppercase tracking-widest text-slate-500">Email Address</label>
+                <input id="email" type="email" class="w-full bg-slate-50 border-none rounded-xl py-4 px-4 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="admin@tovutisha.ke or user@school.ke">
+            </div>
+            <div class="space-y-2">
+                <label class="text-xs font-bold uppercase tracking-widest text-slate-500">Password</label>
+                <input id="password" type="password" class="w-full bg-slate-50 border-none rounded-xl py-4 px-4 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="••••••••">
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="handleLogin('admin')" class="w-full bg-primary text-white font-bold py-4 rounded-xl hover:opacity-90 transition-all shadow-lg shadow-primary/20">
+                    Admin Login
+                </button>
+                <button onclick="handleLogin('user')" class="w-full bg-slate-100 text-primary font-bold py-4 rounded-xl hover:bg-slate-200 transition-all">
+                    User Login
+                </button>
+            </div>
+            
+            <p class="text-[10px] text-center text-slate-400 uppercase tracking-widest font-bold pt-4">
+                Masinde Muliro University Outreach Initiative
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(role) {
+            const email = document.getElementById('email').value;
+            // Simple mock authentication
+            if (role === 'admin') {
+                localStorage.setItem('role', 'admin');
+                location.href = 'admin.html';
+            } else {
+                localStorage.setItem('role', 'user');
+                location.href = 'apply.html';
+            }
+        }
+    </script>
+</body>
+</html>
