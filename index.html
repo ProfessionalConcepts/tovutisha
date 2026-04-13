@@ -61,15 +61,7 @@
                     "surface-container-low": "#f1f4f6"
             },
             "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "fontFamily": {
-                    "headline": ["Inter"],
-                    "body": ["Inter"],
-                    "label": ["Inter"]
+                    "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"
             }
           },
         },
@@ -78,53 +70,44 @@
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .glass-nav { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
-        .hero-slideshow {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-        }
-        .slide {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
+        .hero-slideshow { position: absolute; inset: 0; z-index: 0; }
+        .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
         .slide.active { opacity: 1; }
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,32,69,0.8) 0%, rgba(26,54,93,0.6) 100%);
-            z-index: 1;
-        }
+        .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,32,69,0.8) 0%, rgba(26,54,93,0.6) 100%); z-index: 1; }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
-<!-- Top Navigation Bar -->
+<body class="bg-background text-on-surface font-body">
 <nav class="sticky top-0 z-50 glass-nav bg-slate-50/80 dark:bg-slate-950/80 w-full border-b border-slate-100/50">
-    <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto w-full font-inter antialiased text-sm tracking-tight transition-all duration-300 ease-out">
-        <div class="text-xl font-black tracking-tighter text-blue-900 dark:text-white uppercase"><a href="index.html">TOVUTISHA</a></div>
+    <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto w-full font-inter text-sm tracking-tight">
+        <div class="text-xl font-black tracking-tighter text-blue-900 dark:text-white uppercase"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto"></a></div>
         <div class="hidden md:flex items-center space-x-8">
             <a class="text-blue-900 dark:text-blue-100 font-bold border-b-2 border-primary pb-1" href="index.html">Home</a>
-            <a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors" href="schools.html">Schools</a>
-            <a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors" href="#">About</a>
+            <a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="schools.html">Schools</a>
+            <a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="#">About</a>
         </div>
-        <!-- Search Bar (on_right) -->
         <div class="flex items-center space-x-4">
             <div class="relative hidden lg:block">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-sm" data-icon="search">search</span>
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-sm">search</span>
                 <input class="bg-surface-container border-none rounded-full py-1.5 pl-10 pr-4 text-xs focus:ring-2 focus:ring-secondary/50 w-48" placeholder="Search schools..." type="text"/>
             </div>
-            <button class="md:hidden text-primary">
-                <span class="material-symbols-outlined" data-icon="menu">menu</span>
+            <button onclick="toggleMobileMenu()" class="md:hidden text-primary">
+                <span class="material-symbols-outlined" id="menu-icon">menu</span>
             </button>
         </div>
     </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 p-6 space-y-4 animate-in slide-in-from-top duration-300">
+        <a class="block font-bold text-primary" href="index.html">Home</a>
+        <a class="block text-slate-600" href="schools.html">Schools</a>
+        <a class="block text-slate-600" href="#">About</a>
+        <hr class="border-slate-50">
+        <button onclick="location.href='login.html'" class="w-full bg-primary text-white py-3 rounded-xl font-bold">Portal Access</button>
+    </div>
 </nav>
+
 <main>
 <!-- Hero Section -->
-<section class="relative overflow-hidden py-24 md:py-32 min-h-[600px] flex items-center">
+<section class="relative overflow-hidden py-20 md:py-32 min-h-[500px] flex items-center">
     <div class="hero-slideshow">
         <div class="slide active" style="background-image: url('images/DSC_6442.JPG');"></div>
         <div class="slide" style="background-image: url('images/skyscrapers-sunset.jpg');"></div>
@@ -132,176 +115,120 @@
     <div class="hero-overlay"></div>
     
     <div class="max-w-7xl mx-auto px-8 relative z-10 grid md:grid-cols-12 gap-12 items-center">
-        <div class="md:col-span-7 space-y-8">
-            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
-                <span class="material-symbols-outlined text-secondary text-lg" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+        <div class="md:col-span-7 space-y-8 text-center md:text-left">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mx-auto md:mx-0">
+                <span class="material-symbols-outlined text-secondary text-lg" style="font-variation-settings: 'FILL' 1;">verified</span>
                 <span id="hero-badge" class="text-white text-xs font-bold tracking-widest uppercase">MMUST Outreach Initiative</span>
             </div>
-            <h1 id="hero-title" class="text-white text-5xl md:text-7xl font-black tracking-tight leading-[1.1]">
-                Empowering Kenyan Schools with a Digital Presence.
-            </h1>
-            <p id="hero-subtitle" class="text-blue-50 text-xl md:text-2xl font-medium max-w-2xl leading-relaxed">
-                Affordable, professional websites for only KES 5,000/year. Bridging the digital divide across 47 counties.
-            </p>
-            <div class="flex flex-wrap gap-4 pt-4">
-                <button onclick="location.href='login.html'" class="bg-secondary-container text-on-secondary-fixed font-bold py-4 px-10 rounded-lg hover:shadow-2xl transition-all text-lg">Incorporate Your School</button>
-                <button class="bg-white/10 text-white backdrop-blur-md border border-white/20 font-bold py-4 px-10 rounded-lg hover:bg-white/20 transition-all text-lg">Learn More</button>
+            <h1 id="hero-title" class="text-white text-4xl md:text-7xl font-black tracking-tight leading-[1.1]">Empowering Kenyan Schools with a Digital Presence.</h1>
+            <p id="hero-subtitle" class="text-blue-50 text-lg md:text-2xl font-medium max-w-2xl mx-auto md:mx-0 leading-relaxed">Affordable, professional websites for only KES 5,000/year. Bridging the digital divide.</p>
+            <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-4">
+                <button onclick="location.href='login.html'" class="bg-secondary-container text-on-secondary-fixed font-bold py-4 px-10 rounded-2xl hover:shadow-2xl transition-all">Incorporate Your School</button>
+                <button class="bg-white/10 text-white backdrop-blur-md border border-white/20 font-bold py-4 px-10 rounded-2xl">Learn More</button>
             </div>
         </div>
         <div class="md:col-span-5 relative hidden md:block">
             <div class="aspect-square bg-white/5 rounded-3xl overflow-hidden backdrop-blur-xl border border-white/10 p-4 transform rotate-3 hover:rotate-0 transition-transform duration-700">
                 <img id="hero-image" class="w-full h-full object-cover rounded-2xl shadow-inner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9L-BsPxbpGNXPodJa_8P6C1hJxweQdtJdrvDB6zW8v0AiZzgYwv0ERYvFISmsSq5B91jveLz7jsGj7GiiqCuvW-qlgPCb-_qi85O8W9VP2wGekqOcnA_v57sBFy3nhfvLWVGJH9jXds0CkWtwvYeE3-gVJQxb1fiE2QXqEhDg5pEoGl_77krNNUxsXBcGTC2HA7lkSkErXVOvQhKHjBHUGpxhj0Xv9XfmRnBoqYn6ay5063LoLOA0atMz0nB3I4RWZ-6mHcgDMOw"/>
             </div>
-            <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl space-y-2 max-w-[240px]">
-                <p class="text-primary font-bold text-lg leading-tight">Digital Transformation</p>
-                <p id="hero-floating-text" class="text-slate-600 text-sm">Join over 150 schools already online with TOVUTISHA.</p>
+            <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-xl space-y-2 max-w-[200px]">
+                <p class="text-primary font-bold leading-tight">Digital Transformation</p>
+                <p id="hero-floating-text" class="text-slate-600 text-xs">Join over 150 schools already online with TOVUTISHA.</p>
             </div>
         </div>
     </div>
 </section>
-<!-- Decorative Background Element -->
-<div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary/20 blur-[120px] rounded-full"></div>
-</section>
-<!-- Stats Section -->
-<section class="bg-surface-container-low py-20">
-<div class="max-w-7xl mx-auto px-8">
-<div id="stats-container" class="grid grid-cols-1 md:grid-cols-3 gap-12">
-<div class="flex flex-col items-center md:items-start space-y-2 p-8 bg-surface-container-lowest rounded-xl shadow-sm">
-<span class="text-primary text-5xl font-black tracking-tighter">150+</span>
-<span class="text-on-surface-variant text-sm font-bold uppercase tracking-widest">Schools</span>
-</div>
-<div class="flex flex-col items-center md:items-start space-y-2 p-8 bg-surface-container-lowest rounded-xl shadow-sm">
-<span class="text-secondary text-5xl font-black tracking-tighter">47</span>
-<span class="text-on-surface-variant text-sm font-bold uppercase tracking-widest">Counties Covered</span>
-</div>
-<div class="flex flex-col items-center md:items-start space-y-2 p-8 bg-surface-container-lowest rounded-xl shadow-sm">
-<span class="text-primary text-5xl font-black tracking-tighter">5,000+</span>
-<span class="text-on-surface-variant text-sm font-bold uppercase tracking-widest">Students Reached</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Featured Schools Section (Carousel Pattern) -->
-<section class="py-24 bg-surface">
-<div class="max-w-7xl mx-auto px-8">
-<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-<div class="max-w-2xl">
-<h2 class="text-3xl md:text-4xl font-black text-primary tracking-tight mb-4 uppercase">Featured Schools</h2>
-<p id="featured-description" class="text-on-surface-variant text-lg">Explore the digital homes of Kenya's premier academic institutions built on the TOVUTISHA platform.</p>
-</div>
-<div class="flex gap-2">
-<button class="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-surface-container transition-colors">
-<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
-</button>
-<button class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center hover:shadow-lg transition-all">
-<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
-</button>
-</div>
-</div>
-<div id="featured-schools-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <!-- Default Cards -->
-    <div class="bg-surface-container-lowest rounded-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
-        <div class="aspect-[4/3] relative">
-            <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnUeVjRZLLoT6XIJ2xkzmG9ixGaO_GEjTUC9qPuEHDEiJybrIUi5GtuJ5Vc5rATs-1zYxH1hg9omGs5xuZNhGty-G4ebNlhxrChsbFCu8P6TGsoUSSFa1edSeEm97_mFAn7qC6bo2_fSKv7ln0dKtQy91Gfm1PVdXdEP7BHLl8XqwrQ4Ju1xjvbXJ5Fc4fWCiHZQN6Kc76c5mygCU5eZ2FKz6QD5WX7lQKwHsn5DwCcbMKH3VCZHthOjZ5Ibb7H1MBV-X8kfO0Ua0"/>
-            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 flex items-center space-x-3">
-                <span class="text-white font-bold tracking-tight">Kakamega High School</span>
+
+<!-- Featured Schools Section -->
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6 text-center md:text-left">
+            <div class="max-w-2xl">
+                <h2 class="text-3xl md:text-4xl font-black text-primary tracking-tight mb-4 uppercase">Featured Schools</h2>
+                <p id="featured-description" class="text-on-surface-variant text-lg">Explore the digital homes of Kenya's premier academic institutions.</p>
             </div>
         </div>
-        <div class="p-8 space-y-4">
-            <p class="text-on-surface-variant text-sm leading-relaxed">Setting standards in academic and co-curricular excellence through digital integration.</p>
-            <a class="inline-flex items-center text-secondary font-bold hover:gap-2 transition-all" href="school-template.html">
-                View Website
-                <span class="material-symbols-outlined ml-1" data-icon="arrow_forward">arrow_forward</span>
+        <div id="featured-schools-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+</section>
+
+<!-- Partners Section -->
+<section class="py-16 bg-slate-50 border-t border-slate-100">
+    <div class="max-w-7xl mx-auto px-8 text-center">
+        <p class="text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-10">Strategic Partners &amp; Visionaries</p>
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-80 hover:opacity-100 transition-all">
+            <a id="partner-mmust" href="#" target="_blank" class="flex flex-col items-center space-y-4 group">
+                <div class="h-20 w-40 bg-white border border-slate-100 rounded-2xl flex items-center justify-center p-4 group-hover:shadow-md transition-all">
+                    <img src="logo/mmust.png" alt="MMUST" class="max-h-full max-w-full object-contain">
+                </div>
+                <span class="font-bold text-[10px] text-primary tracking-widest uppercase">MMUST Partner</span>
+            </a>
+            <a id="partner-kotda" href="#" target="_blank" class="flex flex-col items-center space-y-4 group">
+                <div class="h-20 w-40 bg-white border border-slate-100 rounded-2xl flex items-center justify-center p-4 group-hover:shadow-md transition-all">
+                    <img src="logo/kotda.png" alt="KoTDA" class="max-h-full max-w-full object-contain">
+                </div>
+                <span class="font-bold text-[10px] text-primary tracking-widest uppercase">KoTDA Vision 2030</span>
+            </a>
+            <a id="partner-ministry" href="#" target="_blank" class="flex flex-col items-center space-y-4 group">
+                <div class="h-20 w-40 bg-white border border-slate-100 rounded-2xl flex items-center justify-center p-4 group-hover:shadow-md transition-all">
+                    <img src="logo/ministry (2).png" alt="Ministry of Education" class="max-h-full max-w-full object-contain">
+                </div>
+                <span class="font-bold text-[10px] text-primary tracking-widest uppercase">Ministry of Education</span>
             </a>
         </div>
     </div>
-</div>
-</div>
-</section>
-<!-- Partners Section -->
-<section class="py-16 bg-surface-container-high">
-<div class="max-w-7xl mx-auto px-8">
-<p id="partners-title" class="text-center text-on-surface-variant text-xs font-bold uppercase tracking-widest mb-10">Strategic Partners &amp; Visionaries</p>
-<div class="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-<div class="flex items-center space-x-4">
-<div class="h-16 w-16 bg-white rounded-full flex items-center justify-center p-2">
-<span class="material-symbols-outlined text-primary text-3xl" data-icon="school">school</span>
-</div>
-<span class="font-bold text-xl text-primary tracking-tighter">MMUST Partner</span>
-</div>
-<div class="flex items-center space-x-4">
-<div class="h-16 w-16 bg-white rounded-full flex items-center justify-center p-2">
-<span class="material-symbols-outlined text-secondary text-3xl" data-icon="rocket_launch">rocket_launch</span>
-</div>
-<span class="font-bold text-xl text-primary tracking-tighter">KoTDA Vision 2030</span>
-</div>
-<div class="flex items-center space-x-4">
-<div class="h-16 w-16 bg-white rounded-full flex items-center justify-center p-2">
-<span class="material-symbols-outlined text-tertiary-container text-3xl" data-icon="account_balance">account_balance</span>
-</div>
-<span class="font-bold text-xl text-primary tracking-tighter">Ministry of Education</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Latest News -->
-<section class="py-24 bg-background">
-<div class="max-w-7xl mx-auto px-8">
-<div class="flex items-center space-x-4 mb-16">
-<div class="h-[2px] w-12 bg-secondary"></div>
-<h2 id="news-title" class="text-3xl font-black text-primary tracking-tight uppercase">Latest Project Updates</h2>
-</div>
-<div id="news-grid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
-<!-- Dynamic News Cards -->
-</div>
-</div>
 </section>
 
 <!-- Call to Action Section -->
 <section class="py-24 bg-primary text-white overflow-hidden relative">
     <div class="max-w-7xl mx-auto px-8 relative z-10 text-center space-y-8">
-        <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-tight">Ready to showcase your school?</h2>
-        <p class="text-blue-100 text-xl max-w-2xl mx-auto font-medium">Join over 150 institutions already benefiting from professional visibility. Get your school online today for only KES 5,000/year.</p>
+        <h2 class="text-3xl md:text-6xl font-black tracking-tight leading-tight px-4">Ready to showcase your school?</h2>
+        <p class="text-blue-100 text-lg md:text-xl max-w-2xl mx-auto font-medium">Join over 150 institutions already benefiting from professional visibility. Get online today.</p>
         <div class="pt-4">
-            <button onclick="location.href='login.html'" class="bg-secondary-container text-on-secondary-fixed font-black py-5 px-12 rounded-2xl hover:shadow-2xl transition-all text-xl uppercase tracking-widest">Register Your Institution</button>
+            <button onclick="location.href='login.html'" class="bg-secondary-container text-on-secondary-fixed font-black py-5 px-12 rounded-2xl hover:shadow-2xl transition-all text-lg uppercase tracking-widest">Register Now</button>
         </div>
     </div>
-    <!-- Decorative Circle -->
     <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
 </section>
-
 </main>
-<!-- Footer -->
-<footer class="bg-slate-100 dark:bg-slate-900 border-t-0">
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-12 py-16 w-full max-w-7xl mx-auto">
-<div class="space-y-6">
-<div class="font-bold text-blue-900 dark:text-blue-200 text-2xl uppercase tracking-tighter">TOVUTISHA</div>
-<p class="text-on-surface-variant text-sm leading-relaxed max-w-xs">
-                    Bridging the academic digital divide through professional, accessible, and high-quality web solutions for Kenyan schools.
-                </p>
-</div>
-<div class="space-y-6">
-<h4 class="text-xs font-medium uppercase tracking-widest text-blue-900 dark:text-blue-100">Partnership &amp; Vision</h4>
-<nav class="flex flex-col space-y-4">
-<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">MMUST Partner</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">KoTDA Vision 2030</a>
-</nav>
-</div>
-<div class="space-y-6">
-<h4 class="text-xs font-medium uppercase tracking-widest text-blue-900 dark:text-blue-100">Legal &amp; Support</h4>
-<nav class="flex flex-col space-y-4">
-<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">Privacy Policy</a>
-<a class="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors text-xs uppercase tracking-widest font-bold" href="#">Terms of Service</a>
-</nav>
-<div class="pt-8">
-<p class="text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">© 2024 TOVUTISHA. Empowering Kenyan Education.</p>
-</div>
-</div>
-</div>
+
+<footer class="bg-white py-16 px-8 border-t border-slate-100">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="space-y-6">
+            <img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto">
+            <p class="text-slate-500 text-sm leading-relaxed max-w-xs">Bridging the academic digital divide through professional web solutions for Kenyan schools.</p>
+        </div>
+        <div class="space-y-6">
+            <h4 class="text-xs font-black uppercase tracking-widest text-primary">Quick Links</h4>
+            <nav class="flex flex-col space-y-4 text-sm font-bold text-slate-400">
+                <a class="hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="hover:text-primary transition-colors" href="schools.html">Schools Directory</a>
+                <a class="hover:text-primary transition-colors" href="privacy.html">Privacy Policy</a>
+                <a class="hover:text-primary transition-colors" href="terms.html">Terms of Service</a>
+            </nav>
+        </div>
+        <div class="space-y-6">
+            <h4 class="text-xs font-black uppercase tracking-widest text-primary">Strategic Alliances</h4>
+            <nav class="flex flex-col space-y-4 text-sm font-bold text-slate-400">
+                <a id="footer-mmust" class="hover:text-primary transition-colors" href="#" target="_blank">MMUST Partner</a>
+                <a id="footer-kotda" class="hover:text-primary transition-colors" href="#" target="_blank">KoTDA Vision 2030</a>
+                <a id="footer-ministry" class="hover:text-primary transition-colors" href="#" target="_blank">Ministry of Education</a>
+            </nav>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-50 text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">
+        © 2024 TOVUTISHA. ALL RIGHTS RESERVED.
+    </div>
 </footer>
 
 <script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        menu.classList.toggle('hidden');
+        icon.innerText = menu.classList.contains('hidden') ? 'menu' : 'close';
+    }
+
     function loadHomeData() {
         const homeData = JSON.parse(localStorage.getItem('homeContent') || '{}');
         if (homeData.hero) {
@@ -310,41 +237,33 @@
             document.getElementById('hero-floating-text').innerText = homeData.hero.floatingText;
         }
         
+        const partners = JSON.parse(localStorage.getItem('partnerLinks') || '{}');
+        ['mmust', 'kotda', 'ministry'].forEach(p => {
+            const url = partners[p + 'Url'] || '#';
+            const el = document.getElementById('partner-' + p);
+            const fel = document.getElementById('footer-' + p);
+            if(el) el.href = url;
+            if(fel) fel.href = url;
+        });
+
         const schools = JSON.parse(localStorage.getItem('schools') || '[]');
         const featured = schools.filter(s => s.featured);
         if (featured.length > 0) {
             document.getElementById('featured-schools-grid').innerHTML = featured.map(s => `
-                <div class="bg-surface-container-lowest rounded-xl overflow-hidden group hover:shadow-2xl transition-all duration-500">
-                    <div class="aspect-[4/3] relative">
-                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" src="${s.photo || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
+                <div class="bg-slate-50 rounded-[2rem] overflow-hidden group hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col">
+                    <div class="h-48 relative overflow-hidden shrink-0">
+                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${s.photo || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
                         <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4">
-                            <span class="text-white font-bold tracking-tight">${s.name}</span>
-                            <div class="text-blue-200 text-[10px] font-bold uppercase tracking-widest">${s.curriculum} excellence</div>
+                        <div class="absolute bottom-6 left-6">
+                            <span class="text-white font-black text-lg tracking-tight uppercase">${s.name}</span>
+                            <div class="text-blue-200 text-[9px] font-black uppercase tracking-widest">${s.curriculum} EXCELLENCE</div>
                         </div>
                     </div>
-                    <div class="p-8 space-y-4">
-                        <p class="text-on-surface-variant text-sm leading-relaxed">${s.excellence || ''}</p>
-                        <a class="inline-flex items-center text-secondary font-bold hover:gap-2 transition-all" href="school-template.html">
-                            View Website <span class="material-symbols-outlined ml-1">arrow_forward</span>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">${s.excellence || ''}</p>
+                        <a class="mt-auto inline-flex items-center text-secondary font-black text-[10px] uppercase tracking-widest hover:gap-2 transition-all" href="school-template.html">
+                            View Website <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
                         </a>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        const news = JSON.parse(localStorage.getItem('news') || '[]');
-        if (news.length > 0) {
-            document.getElementById('news-grid').innerHTML = news.map(n => `
-                <div class="group cursor-pointer">
-                    <div class="mb-6 overflow-hidden rounded-xl">
-                        <img class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" src="${n.image || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
-                    </div>
-                    <span class="text-secondary text-xs font-bold uppercase tracking-widest block mb-3">${n.category}</span>
-                    <h3 class="text-xl font-bold text-primary leading-tight mb-4 group-hover:text-secondary transition-colors">${n.title}</h3>
-                    <p class="text-on-surface-variant text-sm leading-relaxed line-clamp-2">${n.content}</p>
-                    <div class="mt-6 flex items-center space-x-4">
-                        <span class="text-xs text-outline font-medium">${n.date}</span>
                     </div>
                 </div>
             `).join('');
@@ -352,7 +271,6 @@
     }
     loadHomeData();
 
-    // Slideshow Logic
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     function nextSlide() {

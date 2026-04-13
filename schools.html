@@ -26,82 +26,172 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
         .glass-nav { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
         #map { height: 600px; width: 100%; border-radius: 1.5rem; display: none; }
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em 1.5em;
+        }
     </style>
 </head>
 <body class="bg-surface font-body text-on-surface antialiased">
-<nav class="fixed top-0 w-full z-50 bg-white/80 glass-nav flex justify-between items-center px-8 py-4 border-b border-slate-200/50">
-    <div class="flex items-center gap-12">
-        <span class="text-2xl font-extrabold font-manrope bg-gradient-to-br from-blue-900 to-blue-700 bg-clip-text text-transparent uppercase"><a href="index.html">TOVUTISHA</a></span>
-        <div class="hidden md:flex gap-8 items-center font-manrope tracking-tight text-sm font-semibold">
-            <a class="text-slate-500 hover:text-primary transition-colors" href="index.html">Home</a>
-            <a class="text-blue-900 border-b-2 border-primary pb-1" href="schools.html">Schools</a>
-            <a class="text-slate-500 hover:text-primary transition-colors" href="#">About</a>
+<nav class="sticky top-0 z-50 glass-nav bg-slate-50/80 dark:bg-slate-950/80 w-full border-b border-slate-100/50">
+    <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto w-full font-inter antialiased text-sm tracking-tight transition-all duration-300 ease-out">
+        <div class="text-xl font-black tracking-tighter text-primary uppercase"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto"></a></div>
+        <div class="hidden md:flex gap-8 items-center font-bold">
+            <a class="text-slate-600 hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-primary border-b-2 border-primary pb-1" href="schools.html">Schools</a>
+            <a class="text-slate-600 hover:text-primary transition-colors" href="#">About</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative hidden lg:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                <input id="mainSearch" oninput="renderSchools()" class="bg-white border border-slate-200 rounded-full py-1.5 pl-10 pr-4 text-xs focus:ring-2 focus:ring-primary/20 w-48 outline-none" placeholder="Search name or county..." type="text"/>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden text-primary">
+                <span class="material-symbols-outlined" id="menu-icon">menu</span>
+            </button>
         </div>
     </div>
-    <div class="flex items-center gap-4">
-        <button onclick="location.href='login.html'" class="bg-primary text-white px-6 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:opacity-90 transition-opacity">Get Started</button>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 p-6 space-y-4 animate-in slide-in-from-top duration-300">
+        <a class="block text-slate-600" href="index.html">Home</a>
+        <a class="block font-bold text-primary" href="schools.html">Schools</a>
+        <a class="block text-slate-600" href="#">About</a>
+        <hr class="border-slate-50">
+        <button onclick="location.href='login.html'" class="w-full bg-primary text-white py-3 rounded-xl font-bold">Portal Access</button>
     </div>
 </nav>
 
-<main class="pt-24 pb-12 px-8 max-w-screen-2xl mx-auto">
+<main class="pt-12 pb-12 px-8 max-w-screen-2xl mx-auto">
     <header class="mb-12">
         <h1 class="font-headline text-5xl font-extrabold text-primary mb-4 tracking-tight">Schools Directory</h1>
-        <p id="page-description" class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">Explore Kenyan institutions across the 47 counties.</p>
+        <p id="page-description" class="text-slate-500 text-lg max-w-2xl leading-relaxed">Explore and filter through the comprehensive registry of Kenyan educational institutions.</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <aside class="lg:col-span-3 space-y-6 sticky top-28">
-            <div class="bg-slate-100 p-6 rounded-2xl space-y-8">
-                <div>
-                    <label class="block text-primary font-bold text-sm uppercase tracking-wider mb-4">View Mode</label>
-                    <div class="flex p-1 bg-white rounded-xl">
-                        <button onclick="setView('grid')" id="btn-grid" class="flex-1 py-2 rounded-lg bg-primary text-white font-bold text-xs">GRID</button>
-                        <button onclick="setView('map')" id="btn-map" class="flex-1 py-2 rounded-lg text-slate-500 font-bold text-xs">MAP</button>
+            <!-- Professional Minimalist Filter Panel -->
+            <div class="bg-white p-1 rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="flex p-1 bg-slate-50 rounded-xl mb-4">
+                    <button onclick="setView('grid')" id="btn-grid" class="flex-1 py-2 rounded-lg bg-primary text-white font-bold text-[10px] tracking-widest transition-all">GRID VIEW</button>
+                    <button onclick="setView('map')" id="btn-map" class="flex-1 py-2 rounded-lg text-slate-500 font-bold text-[10px] tracking-widest transition-all">MAP VIEW</button>
+                </div>
+                
+                <div class="p-4 space-y-5">
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Location</label>
+                        <select id="filterCounty" onchange="renderSchools()" class="w-full bg-slate-50 border border-slate-100 rounded-xl text-sm py-3 px-4 focus:ring-2 focus:ring-primary/5 transition-all outline-none">
+                            <option value="all">All 47 Counties</option>
+                            <option>Baringo</option><option>Bomet</option><option>Bungoma</option><option>Busia</option><option>Elgeyo-Marakwet</option><option>Embu</option><option>Garissa</option><option>Homa Bay</option><option>Isiolo</option><option>Kajiado</option><option>Kakamega</option><option>Kericho</option><option>Kiambu</option><option>Kilifi</option><option>Kirinyaga</option><option>Kisii</option><option>Kisumu</option><option>Kitui</option><option>Kwale</option><option>Laikipia</option><option>Lamu</option><option>Machakos</option><option>Makueni</option><option>Mandera</option><option>Marsabit</option><option>Meru</option><option>Migori</option><option>Mombasa</option><option>Murang'a</option><option>Nairobi</option><option>Nakuru</option><option>Nandi</option><option>Narok</option><option>Nyamira</option><option>Nyandarua</option><option>Nyeri</option><option>Samburu</option><option>Siaya</option><option>Taita-Taveta</option><option>Tana River</option><option>Tharaka-Nithi</option><option>Trans-Nzoia</option><option>Turkana</option><option>Uasin Gishu</option><option>Vihiga</option><option>Wajir</option><option>West Pokot</option>
+                        </select>
                     </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Institution Status</label>
+                        <select id="filterType" onchange="renderSchools()" class="w-full bg-slate-50 border border-slate-100 rounded-xl text-sm py-3 px-4 outline-none">
+                            <option value="all">All Statuses</option>
+                            <option>Public</option><option>Private</option><option>International</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Curriculum</label>
+                        <select id="filterCurriculum" onchange="renderSchools()" class="w-full bg-slate-50 border border-slate-100 rounded-xl text-sm py-3 px-4 outline-none">
+                            <option value="all">All Curricula</option>
+                            <option>CBC</option><option>8-4-4 Legacy</option><option>International (IGCSE/IB)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Gender</label>
+                        <select id="filterGender" onchange="renderSchools()" class="w-full bg-slate-50 border border-slate-100 rounded-xl text-sm py-3 px-4 outline-none">
+                            <option value="all">Mixed / All</option>
+                            <option>Boys Only</option><option>Girls Only</option><option>Mixed</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Boarding</label>
+                        <select id="filterBoarding" onchange="renderSchools()" class="w-full bg-slate-50 border border-slate-100 rounded-xl text-sm py-3 px-4 outline-none">
+                            <option value="all">Any Mode</option>
+                            <option>Day Only</option><option>Boarding Only</option><option>Day & Boarding</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Student Population</label>
+                        <select id="filterPop" onchange="renderSchools()" class="w-full bg-slate-50 border border-slate-100 rounded-xl text-sm py-3 px-4 outline-none">
+                            <option value="all">Any Size</option>
+                            <option value="0-500">Under 500</option>
+                            <option value="501-1500">500 - 1500</option>
+                            <option value="1501+">Over 1500</option>
+                        </select>
+                    </div>
+
+                    <button onclick="resetFilters()" class="w-full py-4 text-slate-400 font-bold text-[10px] uppercase tracking-[0.2em] hover:text-primary transition-colors pt-4 border-t border-slate-50">Reset All Filters</button>
                 </div>
-                <div>
-                    <label class="block text-primary font-bold text-sm uppercase tracking-wider mb-4">Location</label>
-                    <select id="filterCounty" class="w-full bg-white border-none rounded-xl text-sm py-3 px-4 focus:ring-2 focus:ring-primary/20">
-                        <option value="all">All 47 Counties</option>
-                        <option>Nairobi</option><option>Mombasa</option><option>Kiambu</option>
-                    </select>
-                </div>
-                <button onclick="renderSchools()" class="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm shadow-lg shadow-primary/20">Apply Filters</button>
             </div>
-            <div id="spotlight-card" class="bg-primary-container text-white p-6 rounded-2xl relative overflow-hidden">
+
+            <div id="spotlight-card" class="bg-primary-container text-white p-8 rounded-2xl relative overflow-hidden shadow-lg shadow-primary/10">
                 <div class="relative z-10">
-                    <span class="inline-block px-2 py-1 bg-secondary text-white text-[10px] font-bold uppercase rounded mb-3">Spotlight</span>
-                    <h4 id="spotlight-title" class="font-headline font-bold text-lg mb-2">Academic Excellence</h4>
-                    <p id="spotlight-text" class="text-sm opacity-80 mb-4">Discover institutions ranked top in the latest indices.</p>
+                    <span class="inline-block px-3 py-1 bg-secondary text-white text-[9px] font-black uppercase rounded-lg mb-4 tracking-widest">Spotlight</span>
+                    <h4 id="spotlight-title" class="font-headline font-bold text-xl mb-2 leading-tight">Academic Excellence</h4>
+                    <p id="spotlight-text" class="text-sm text-blue-100 opacity-80 leading-relaxed mb-4">Discover institutions ranked top in the latest indices.</p>
+                </div>
+                <div class="absolute -right-6 -bottom-6 opacity-10 rotate-12">
+                    <span class="material-symbols-outlined text-9xl">workspace_premium</span>
                 </div>
             </div>
         </aside>
 
         <div class="lg:col-span-9 space-y-8">
+            <div class="flex justify-between items-center px-4">
+                <span id="result-count" class="text-xs font-bold text-slate-400 uppercase tracking-widest">0 Institutions Found</span>
+            </div>
             <div id="schoolsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             <div id="map"></div>
         </div>
     </div>
 </main>
 
+<footer class="w-full py-16 px-8 border-t border-slate-100 bg-white flex flex-col md:flex-row justify-between items-center gap-8 mt-20">
+    <div class="flex flex-col gap-4">
+        <a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto"></a>
+        <p class="font-inter text-xs tracking-widest uppercase text-slate-400">© 2024 TOVUTISHA. Empowering Education.</p>
+    </div>
+    <div class="flex flex-wrap justify-center gap-10 font-inter text-[10px] font-black tracking-[0.2em] uppercase">
+        <a class="text-slate-400 hover:text-primary transition-colors" href="privacy.html">Privacy Policy</a>
+        <a class="text-slate-400 hover:text-primary transition-colors" href="terms.html">Terms of Service</a>
+    </div>
+</footer>
+
 <!-- Excellence Modal -->
-<div id="excellenceModal" class="fixed inset-0 bg-primary/40 backdrop-blur-sm z-[60] flex items-center justify-center hidden p-6">
-    <div class="bg-white rounded-3xl w-full max-w-2xl p-8 space-y-6 max-h-[90vh] overflow-y-auto">
+<div id="excellenceModal" class="fixed inset-0 bg-primary/60 backdrop-blur-md z-[60] flex items-center justify-center hidden p-6">
+    <div class="bg-white rounded-[2rem] w-full max-w-2xl p-10 space-y-8 max-h-[90vh] overflow-y-auto shadow-2xl">
         <div class="flex justify-between items-center">
-            <h2 id="exc-school-name" class="text-2xl font-black text-primary uppercase">Academic Excellence</h2>
-            <button onclick="closeExcModal()" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">close</span></button>
+            <h2 id="exc-school-name" class="text-3xl font-black text-primary uppercase tracking-tight">Academic Excellence</h2>
+            <button onclick="closeExcModal()" class="w-10 h-10 rounded-full bg-slate-50 text-slate-400 hover:text-primary transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined">close</span>
+            </button>
         </div>
-        <div id="exc-content" class="space-y-6">
-            <p id="exc-desc" class="text-slate-600 leading-relaxed"></p>
-            <div id="exc-results-container" class="space-y-4">
-                <h3 class="font-bold text-primary uppercase text-sm tracking-widest">Exam Results Analysis</h3>
-                <img id="exc-photo" class="w-full rounded-2xl border border-slate-100 shadow-sm" src="">
-                <a id="exc-doc" href="#" target="_blank" class="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all border border-slate-200">
-                    <span class="material-symbols-outlined text-primary">description</span>
-                    <div>
-                        <div class="font-bold text-sm text-primary">Download Performance Report</div>
-                        <div class="text-[10px] text-slate-400 uppercase font-bold">PDF / EXCEL DOCUMENT</div>
+        <div id="exc-content" class="space-y-8">
+            <p id="exc-desc" class="text-slate-600 leading-relaxed text-lg font-medium"></p>
+            <div id="exc-results-container" class="space-y-6 pt-6 border-t border-slate-50">
+                <h3 class="font-black text-primary uppercase text-xs tracking-[0.2em]">Verified Performance Data</h3>
+                <img id="exc-photo" class="w-full rounded-2xl shadow-xl border border-slate-50" src="">
+                <a id="exc-doc" href="#" target="_blank" class="flex items-center justify-between p-6 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                            <span class="material-symbols-outlined text-primary text-2xl">description</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-primary">Download Results Report</div>
+                            <div class="text-[9px] text-slate-400 uppercase font-black tracking-widest">PDF / EXCEL DOCUMENT</div>
+                        </div>
                     </div>
+                    <span class="material-symbols-outlined text-slate-300 group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
         </div>
@@ -113,27 +203,36 @@
     function setView(v) {
         document.getElementById('schoolsGrid').style.display = v === 'grid' ? 'grid' : 'none';
         document.getElementById('map').style.display = v === 'map' ? 'block' : 'none';
-        document.getElementById('btn-grid').className = v === 'grid' ? 'flex-1 py-2 rounded-lg bg-primary text-white font-bold text-xs' : 'flex-1 py-2 rounded-lg text-slate-500 font-bold text-xs';
-        document.getElementById('btn-map').className = v === 'map' ? 'flex-1 py-2 rounded-lg bg-primary text-white font-bold text-xs' : 'flex-1 py-2 rounded-lg text-slate-500 font-bold text-xs';
+        document.getElementById('btn-grid').className = v === 'grid' ? 'flex-1 py-2 rounded-lg bg-primary text-white font-bold text-[10px] tracking-widest' : 'flex-1 py-2 rounded-lg text-slate-500 font-bold text-[10px] tracking-widest';
+        document.getElementById('btn-map').className = v === 'map' ? 'flex-1 py-2 rounded-lg bg-primary text-white font-bold text-[10px] tracking-widest' : 'flex-1 py-2 rounded-lg text-slate-500 font-bold text-[10px] tracking-widest';
         if(v === 'map') initMap();
     }
 
     function initMap() {
-        if(map) return;
-        map = L.map('map').setView([-1.286, 36.817], 7);
+        if(map) map.remove();
+        map = L.map('map', { zoomControl: false }).setView([-1.286, 36.817], 7);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        const schools = JSON.parse(localStorage.getItem('schools') || '[]');
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+        
+        const schools = getFilteredSchools();
         schools.forEach(s => {
             if(s.lat && s.lng) {
-                L.marker([s.lat, s.lng]).addTo(map).bindPopup(`<b>${s.name}</b><br>${s.county} County`);
+                L.marker([s.lat, s.lng]).addTo(map).bindPopup(`
+                    <div class="p-2 font-inter">
+                        <div class="font-black text-primary uppercase text-xs mb-1">${s.name}</div>
+                        <div class="text-[10px] text-slate-500 uppercase font-bold mb-2">${s.county} County</div>
+                        <a href="${s.website || '#'}" target="_blank" class="text-secondary font-black text-[9px] uppercase tracking-widest">Visit Institution Site →</a>
+                    </div>
+                `);
             }
         });
     }
 
     function openExcModal(idx) {
-        const s = JSON.parse(localStorage.getItem('schools') || '[]')[idx];
+        const schools = JSON.parse(localStorage.getItem('schools') || '[]');
+        const s = schools[idx];
         document.getElementById('exc-school-name').innerText = s.name;
-        document.getElementById('exc-desc').innerText = s.excellence || 'No highlights provided.';
+        document.getElementById('exc-desc').innerText = s.excellence || 'No academic highlights have been uploaded for this institution yet.';
         const photo = document.getElementById('exc-photo');
         if(s.resultsPhoto) { photo.src = s.resultsPhoto; photo.style.display = 'block'; } else { photo.style.display = 'none'; }
         const doc = document.getElementById('exc-doc');
@@ -142,40 +241,85 @@
     }
     function closeExcModal() { document.getElementById('excellenceModal').classList.add('hidden'); }
 
-    function renderSchools() {
+    function getFilteredSchools() {
         const schools = JSON.parse(localStorage.getItem('schools') || '[]');
-        const grid = document.getElementById('schoolsGrid');
-        const settings = JSON.parse(localStorage.getItem('directorySettings') || '{}');
-        if(settings.description) document.getElementById('page-description').innerText = settings.description;
-        if(settings.spotlightTitle) document.getElementById('spotlight-title').innerText = settings.spotlightTitle;
-        if(settings.spotlightText) document.getElementById('spotlight-text').innerText = settings.spotlightText;
+        const q = document.getElementById('mainSearch').value.toLowerCase();
+        const county = document.getElementById('filterCounty').value;
+        const type = document.getElementById('filterType').value;
+        const curr = document.getElementById('filterCurriculum').value;
+        const gender = document.getElementById('filterGender').value;
+        const boarding = document.getElementById('filterBoarding').value;
+        const pop = document.getElementById('filterPop').value;
 
-        if (schools.length === 0) {
-            grid.innerHTML = '<div class="col-span-full p-12 text-center bg-white rounded-2xl border border-slate-100 text-slate-400">Our directory is being updated.</div>';
+        return schools.filter(s => {
+            const matchesSearch = s.name.toLowerCase().includes(q) || s.county.toLowerCase().includes(q);
+            const matchesCounty = county === 'all' || s.county === county;
+            const matchesType = type === 'all' || s.type === type;
+            const matchesCurr = curr === 'all' || s.curriculum === curr;
+            const matchesGender = gender === 'all' || s.gender === gender;
+            const matchesBoarding = boarding === 'all' || s.boarding === boarding;
+            
+            let matchesPop = true;
+            if(pop !== 'all') {
+                const count = parseInt(s.population || 0);
+                if(pop === '0-500') matchesPop = count <= 500;
+                else if(pop === '501-1500') matchesPop = count > 500 && count <= 1500;
+                else if(pop === '1501+') matchesPop = count > 1500;
+            }
+
+            return matchesSearch && matchesCounty && matchesType && matchesCurr && matchesGender && matchesBoarding && matchesPop;
+        });
+    }
+
+    function resetFilters() {
+        document.getElementById('mainSearch').value = '';
+        document.getElementById('filterCounty').value = 'all';
+        document.getElementById('filterType').value = 'all';
+        document.getElementById('filterCurriculum').value = 'all';
+        document.getElementById('filterGender').value = 'all';
+        document.getElementById('filterBoarding').value = 'all';
+        document.getElementById('filterPop').value = 'all';
+        renderSchools();
+    }
+
+    function renderSchools() {
+        const filtered = getFilteredSchools();
+        const allSchools = JSON.parse(localStorage.getItem('schools') || '[]');
+        const grid = document.getElementById('schoolsGrid');
+        document.getElementById('result-count').innerText = `${filtered.length} Institutions Found`;
+        
+        if (filtered.length === 0) {
+            grid.innerHTML = '<div class="col-span-full p-20 text-center bg-white rounded-[2rem] border border-slate-100 text-slate-400 font-bold uppercase tracking-widest text-xs">No institutions match your refined criteria</div>';
             return;
         }
 
-        grid.innerHTML = schools.map((s, i) => `
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all group border border-slate-100">
-                <div class="h-40 bg-slate-100 relative">
-                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${s.photo || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
-                    <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${s.type}</div>
+        grid.innerHTML = filtered.map(s => {
+            const originalIndex = allSchools.findIndex(sch => sch.name === s.name);
+            return `
+            <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 group border border-slate-100 flex flex-col">
+                <div class="h-48 bg-slate-100 relative shrink-0 overflow-hidden">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${s.photo || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
+                    <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-md text-primary px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-xl">${s.type}</div>
                 </div>
-                <div class="p-8 -mt-10 relative z-10">
-                    <div class="w-20 h-20 rounded-2xl bg-white shadow-xl p-2 mb-4 border border-slate-100">
+                <div class="p-8 -mt-12 relative z-10 flex-1 flex flex-col">
+                    <div class="w-20 h-20 rounded-2xl bg-white shadow-2xl p-2 mb-6 border border-slate-50 shrink-0 transform group-hover:-translate-y-1 transition-transform">
                         <img class="w-full h-full object-contain rounded-xl" src="${s.logo || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCzHiCWTuySGN9LlZf8sSngBc2UZ2UscN4t4nbNM5TKkmEX7c9H0O5hNP0uNcy8eJwfRqKwNpNh5Mh3WoiG6IrVtyWNf4gJ-PQ7vXQGcjqyVn-J2Lm5KZhEgebeTOMO4YSG0XymKLIEDrPwTt4Wsir6LRACRnmTiLi0el0iC9WEfjRLJ77TYFkm1WDyBJsFCXpxhzWzsMY_CaUO0bJs2hOTO1knFTEEgNbGq-2KZBtmPqiLna2HNlMJYNNzXOKPTf9aqhv4J2Qc3Kk'}">
                     </div>
-                    <h3 class="font-headline font-bold text-xl text-primary mb-1">${s.name}</h3>
-                    <div class="flex items-center gap-2 text-slate-500 text-xs mb-6">
-                        <span class="material-symbols-outlined text-sm">group</span> ${s.population || '---'} Students • ${s.county} County
+                    <h3 class="font-headline font-bold text-2xl text-primary mb-2 line-clamp-1 tracking-tight">${s.name}</h3>
+                    <div class="flex items-center gap-3 text-slate-400 text-[10px] font-black uppercase tracking-widest mb-8">
+                        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">group</span> ${s.population || '---'}</div>
+                        <div class="w-1 h-1 bg-slate-200 rounded-full"></div>
+                        <div class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">location_on</span> ${s.county}</div>
                     </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="openExcModal(${i})" class="bg-slate-100 text-primary py-3 rounded-xl text-xs font-bold hover:bg-slate-200 transition-all uppercase tracking-wider">Academic Excellence</button>
-                        <a href="${s.website || '#'}" target="_blank" class="bg-primary text-white py-3 rounded-xl text-xs font-bold text-center hover:opacity-90 transition-all uppercase tracking-wider">Visit Website</a>
+                    <div class="mt-auto grid grid-cols-2 gap-4">
+                        <button onclick="openExcModal(${originalIndex})" class="bg-slate-50 text-slate-600 py-4 rounded-2xl text-[9px] font-black hover:bg-slate-100 transition-all uppercase tracking-widest">Academic Excellence</button>
+                        <a href="${s.website || '#'}" target="_blank" class="bg-primary text-white py-4 rounded-2xl text-[9px] font-black text-center hover:opacity-90 transition-all uppercase tracking-widest shadow-lg shadow-primary/10">Visit Website</a>
                     </div>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
+        
+        if(map) initMap();
     }
     renderSchools();
 </script>

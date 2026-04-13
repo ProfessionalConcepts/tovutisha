@@ -30,7 +30,7 @@
 </head>
 <body class="bg-[#f7fafc] text-on-background selection:bg-primary/10">
     <aside class="h-screen w-64 fixed left-0 top-0 bg-white border-r border-slate-100 flex flex-col py-6 space-y-2 z-40">
-        <div class="text-xl font-black text-primary px-8 mb-8 tracking-tighter uppercase">TOVUTISHA</div>
+        <div class="px-8 mb-8"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-8 w-auto"></a></div>
         <nav class="flex-1 flex flex-col space-y-1 text-sm font-medium">
             <button onclick="showSection('apps')" id="nav-apps" class="flex items-center space-x-3 px-8 py-3 bg-primary/5 text-primary border-r-4 border-primary font-bold">
                 <span class="material-symbols-outlined">description</span>
@@ -111,6 +111,41 @@
                         <button type="submit" class="md:col-span-2 bg-primary text-white py-4 rounded-xl font-bold">Update Directory Settings</button>
                     </form>
                 </div>
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2">
+                    <h2 class="text-lg font-bold text-primary mb-6 uppercase">Partner Links & Footer</h2>
+                    <form id="partnerForm" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase text-slate-400">MMUST URL</label>
+                            <input name="mmustUrl" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase text-slate-400">KoTDA URL</label>
+                            <input name="kotdaUrl" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase text-slate-400">Ministry URL</label>
+                            <input name="ministryUrl" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        </div>
+                        <button type="submit" class="md:col-span-3 bg-primary text-white py-4 rounded-xl font-bold">Update Partner Links</button>
+                    </form>
+                </div>
+                <!-- Legal Settings -->
+                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2">
+                    <h2 class="text-lg font-bold text-primary mb-6 uppercase">Legal Pages Content</h2>
+                    <form id="legalSettingsForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-bold text-slate-400 uppercase">Privacy Policy</h3>
+                            <input name="privacyTitle" placeholder="Privacy Title" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                            <textarea name="privacyContent" placeholder="Privacy Content (HTML allowed)" rows="6" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
+                        </div>
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-bold text-slate-400 uppercase">Terms of Service</h3>
+                            <input name="termsTitle" placeholder="Terms Title" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                            <textarea name="termsContent" placeholder="Terms Content (HTML allowed)" rows="6" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="md:col-span-2 bg-primary text-white py-4 rounded-xl font-bold">Update Legal Content</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
@@ -137,19 +172,33 @@
                 <div class="grid grid-cols-3 gap-4">
                     <div class="space-y-1">
                         <label class="text-[10px] font-bold uppercase text-slate-400">Status</label>
-                        <select name="type" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        <select name="type" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
                             <option>Public</option><option>Private</option><option>International</option>
                         </select>
                     </div>
                     <div class="space-y-1">
                         <label class="text-[10px] font-bold uppercase text-slate-400">Curriculum</label>
-                        <select name="curriculum" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                            <option>CBC</option><option>8-4-4</option><option>International</option>
+                        <select name="curriculum" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
+                            <option>CBC</option><option>8-4-4 Legacy</option><option>International</option>
                         </select>
                     </div>
                     <div class="space-y-1">
                         <label class="text-[10px] font-bold uppercase text-slate-400">Population</label>
-                        <input name="population" type="number" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4" placeholder="e.g. 1200">
+                        <input name="population" type="number" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none" placeholder="e.g. 1200">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold uppercase text-slate-400">Gender</label>
+                        <select name="gender" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
+                            <option>Mixed</option><option>Boys Only</option><option>Girls Only</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-bold uppercase text-slate-400">Boarding</label>
+                        <select name="boarding" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
+                            <option>Day Only</option><option>Boarding Only</option><option>Day & Boarding</option>
+                        </select>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
@@ -331,7 +380,45 @@
             df.description.value = dirData.description || '';
             df.spotlightTitle.value = dirData.spotlightTitle || '';
             df.spotlightText.value = dirData.spotlightText || '';
+
+            const legalData = JSON.parse(localStorage.getItem('legalSettings') || '{}');
+            const lf = document.getElementById('legalSettingsForm');
+            lf.privacyTitle.value = legalData.privacyTitle || '';
+            lf.privacyContent.value = legalData.privacyContent || '';
+            lf.termsTitle.value = legalData.termsTitle || '';
+            lf.termsContent.value = legalData.termsContent || '';
+
+            const partnerData = JSON.parse(localStorage.getItem('partnerLinks') || '{}');
+            const pf = document.getElementById('partnerForm');
+            pf.mmustUrl.value = partnerData.mmustUrl || '';
+            pf.kotdaUrl.value = partnerData.kotdaUrl || '';
+            pf.ministryUrl.value = partnerData.ministryUrl || '';
         }
+
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fd = new FormData(this);
+            const data = {
+                mmustUrl: fd.get('mmustUrl'),
+                kotdaUrl: fd.get('kotdaUrl'),
+                ministryUrl: fd.get('ministryUrl')
+            };
+            localStorage.setItem('partnerLinks', JSON.stringify(data));
+            alert('Partner links updated!');
+        });
+
+        document.getElementById('legalSettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fd = new FormData(this);
+            const data = {
+                privacyTitle: fd.get('privacyTitle'),
+                privacyContent: fd.get('privacyContent'),
+                termsTitle: fd.get('termsTitle'),
+                termsContent: fd.get('termsContent')
+            };
+            localStorage.setItem('legalSettings', JSON.stringify(data));
+            alert('Legal pages updated!');
+        });
 
         document.getElementById('heroForm').addEventListener('submit', function(e) {
             e.preventDefault();
