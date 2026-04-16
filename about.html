@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>About Us | TOVUTISHA</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,FILL@0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#002045",
+                        "secondary": "#875200",
+                        "background": "#f7fafc",
+                        "surface": "#ffffff"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+        
+        /* Parallax Effect */
+        .parallax-container {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .parallax-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 120%;
+            background-image: url('images/skyscrapers-sunset.jpg');
+            background-size: cover; background-position: center;
+            z-index: -1; transform: translateZ(0); will-change: transform;
+        }
+        .parallax-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(0,32,69,0.95) 0%, rgba(0,32,69,0.6) 100%);
+        }
+
+        /* Sticky Storytelling */
+        .story-section { display: grid; grid-template-cols: 1fr; }
+        @media (min-width: 1024px) { .story-section { grid-template-cols: 1fr 1fr; } }
+        .sticky-visual { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+        .story-content-block {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 4rem;
+            border-radius: 3.5rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 40px 100px -20px rgba(0, 32, 69, 0.1);
+        }
+
+        /* Sliding Mask Reveal Redesign */
+        .mask-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2rem;
+            background: #f8fafc;
+            padding: 0;
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 0;
+            opacity: 0;
+        }
+        .expand-card.open .mask-container {
+            height: auto;
+            padding: 2.5rem;
+            opacity: 1;
+            margin-top: 2.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .mask-reveal {
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+        .mask-reveal-content {
+            transform: translateY(105%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            display: block;
+        }
+        .expand-card.open .mask-reveal-content { transform: translateY(0); }
+        .mask-reveal-delay-1 { transition-delay: 0.15s; }
+        .mask-reveal-delay-2 { transition-delay: 0.3s; }
+
+        /* Expandable Cards Redesign */
+        .expand-card {
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            transform-origin: center top;
+            padding: 3.5rem;
+            border-radius: 4.5rem;
+        }
+        .expand-card.open {
+            border-color: #002045;
+            box-shadow: 0 80px 140px -40px rgba(0, 32, 69, 0.2);
+            transform: scale(1.02);
+            z-index: 20;
+        }
+
+        /* Section Transition */
+        .transition-trigger {
+            transition: all 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(80px) scale(0.96);
+            opacity: 0;
+            filter: blur(10px);
+        }
+        .transition-trigger.visible {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            filter: blur(0);
+        }
+        
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-[#f7fafc] font-body text-slate-900 antialiased selection:bg-secondary/10">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-nav bg-slate-50/80 dark:bg-slate-950/80 w-full border-b border-slate-100/50">
+        <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto w-full font-inter text-sm tracking-tight">
+            <div class="text-xl font-black tracking-tighter text-blue-900 dark:text-white uppercase"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto"></a></div>
+            <div class="hidden md:flex items-center space-x-8 font-bold">
+                <a class="text-slate-600 hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-slate-600 hover:text-primary transition-colors" href="schools.html">Schools</a>
+                <a class="text-primary border-b-2 border-primary pb-1" href="about.html">About</a>
+            </div>
+            <button onclick="toggleMobileMenu()" class="md:hidden text-primary">
+                <span class="material-symbols-outlined" id="menu-icon">menu</span>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 p-6 space-y-4 shadow-xl">
+            <a class="block font-bold text-slate-600 hover:text-primary" href="index.html">Home</a>
+            <a class="block font-bold text-slate-600 hover:text-primary" href="schools.html">Schools</a>
+            <a class="block font-bold text-primary" href="about.html">About</a>
+            <hr class="border-slate-50">
+            <button onclick="location.href='login.html'" class="w-full bg-primary text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs">Portal Access</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Parallax Hero -->
+        <section class="parallax-container">
+            <div class="parallax-bg" id="hero-parallax"></div>
+            <div class="parallax-overlay"></div>
+            <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
+                <div class="max-w-4xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom duration-1000">
+                    <span class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 text-[10px] font-black tracking-[0.3em] uppercase text-white">The TOVUTISHA Legacy</span>
+                    <h1 id="about-hero-title" class="text-5xl md:text-8xl font-black tracking-tighter leading-[0.95] text-white">
+                        Beyond the Digital Divide.
+                    </h1>
+                    <p id="about-hero-subtitle" class="text-blue-100 text-xl md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
+                        A Masinde Muliro University Outreach Initiative dedicated to empowering every school with a professional digital identity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sticky Storytelling Section (Our Foundation) -->
+        <section class="story-section bg-white relative">
+            <div class="sticky-visual hidden lg:block">
+                <img src="images/DSC_6442.JPG" class="w-full h-full object-cover grayscale transition-all duration-1000" id="story-image" alt="History Visual">
+                <div class="absolute inset-0 bg-primary/60 mix-blend-multiply"></div>
+            </div>
+            <div class="p-8 md:p-24 space-y-32 relative z-10">
+                <!-- Chapter 1 -->
+                <div class="fade-up">
+                    <div class="story-content-block space-y-8 border-l-[12px] border-primary">
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-black text-secondary uppercase tracking-[0.6em]">Institutional Origin</span>
+                            <h3 class="text-5xl font-black text-primary leading-tight uppercase tracking-tighter">Our Foundation</h3>
+                        </div>
+                        <div id="about-story-1" class="prose prose-slate prose-xl text-slate-900 leading-relaxed font-semibold">
+                            <p>Established as a flagship outreach initiative by <strong>Masinde Muliro University of Science and Technology (MMUST)</strong>, TOVUTISHA translates to "Website-ify".</p>
+                            <p>We believe every Kenyan child deserves a school that is visible, transparent, and connected to the global economy.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chapter 2 -->
+                <div class="fade-up">
+                    <div class="story-content-block space-y-8 border-l-[12px] border-secondary">
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-black text-secondary uppercase tracking-[0.6em]">The Strategic Gap</span>
+                            <h3 class="text-5xl font-black text-primary leading-tight uppercase tracking-tighter">The Disparity</h3>
+                        </div>
+                        <div id="about-story-2" class="prose prose-slate prose-lg text-slate-900 leading-relaxed font-semibold">
+                            <p>For too long, professional digital presence was a luxury reserved for high-end institutions. Public and rural schools faced prohibitive technical hurdles.</p>
+                            <p>We shatter these barriers by providing institutional-grade websites for a sustainable flat fee of <strong>KES 5,000 per year</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Chapter 3 -->
+                <div class="fade-up">
+                    <div class="story-content-block space-y-8 border-l-[12px] border-emerald-600">
+                        <div class="space-y-2">
+                            <span class="text-[11px] font-black text-secondary uppercase tracking-[0.6em]">The Tech Roadmap</span>
+                            <h3 class="text-5xl font-black text-primary leading-tight uppercase tracking-tighter">National Vision</h3>
+                        </div>
+                        <div id="about-story-3" class="prose prose-slate prose-lg text-slate-900 leading-relaxed font-semibold">
+                            <p>Aligned with <strong>KoTDA</strong> and the <strong>Ministry of Education</strong>, we are building the digital foundation for Kenya's future leaders.</p>
+                            <p>We envision a Kenya where every school operates at the forefront of digital literacy and excellence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Expandable Cards Section (The TOVUTISHA Standard) -->
+        <section class="py-40 bg-[#f8fafc] relative z-20 overflow-hidden border-y border-slate-100">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="text-center mb-32 space-y-6">
+                    <h2 class="text-xs font-black uppercase tracking-[0.8em] text-secondary">Institutional Pillars</h2>
+                    <h3 class="text-6xl font-black text-primary uppercase tracking-tighter leading-none">The Standard</h3>
+                    <p class="text-slate-400 text-sm font-black uppercase tracking-[0.3em]">Institutional Grade Benchmarks</p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                    <!-- Pillar 1 -->
+                    <div onclick="toggleCard(this)" class="expand-card cursor-pointer group">
+                        <div class="space-y-10">
+                            <div class="flex justify-between items-center">
+                                <div class="w-20 h-20 bg-primary text-white rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-primary/30 group-hover:bg-secondary transition-all duration-500">
+                                    <span class="material-symbols-outlined text-4xl">payments</span>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-200 card-icon text-5xl transition-all duration-500">expand_circle_right</span>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-3xl font-black text-primary uppercase tracking-tight leading-none">Affordability</h4>
+                                <div class="h-1.5 w-12 bg-secondary rounded-full group-hover:w-full transition-all duration-700"></div>
+                                
+                                <div class="mask-container">
+                                    <div class="mask-reveal">
+                                        <p class="mask-reveal-content text-primary text-xl leading-relaxed font-black mb-8">Radical Pricing Transparency.</p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="mask-reveal mask-reveal-delay-1 flex items-center gap-4 border-b border-slate-200 pb-3">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></div>
+                                            <span class="mask-reveal-content text-[12px] font-black text-slate-500 uppercase tracking-widest">Global Cloud Hosting</span>
+                                        </div>
+                                        <div class="mask-reveal mask-reveal-delay-2 flex items-center gap-4 border-b border-slate-200 pb-3">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></div>
+                                            <span class="mask-reveal-content text-[12px] font-black text-slate-500 uppercase tracking-widest">Academic .ke Subdomain</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div onclick="toggleCard(this)" class="expand-card cursor-pointer group">
+                        <div class="space-y-10">
+                            <div class="flex justify-between items-center">
+                                <div class="w-20 h-20 bg-primary text-white rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-primary/30 group-hover:bg-secondary transition-all duration-500">
+                                    <span class="material-symbols-outlined text-4xl">verified_user</span>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-200 card-icon text-5xl transition-all duration-500">expand_circle_right</span>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-3xl font-black text-primary uppercase tracking-tight leading-none">Authority</h4>
+                                <div class="h-1.5 w-12 bg-secondary rounded-full group-hover:w-full transition-all duration-700"></div>
+                                
+                                <div class="mask-container">
+                                    <div class="mask-reveal">
+                                        <p class="mask-reveal-content text-primary text-xl leading-relaxed font-black mb-8">National Academic Oversight.</p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="mask-reveal mask-reveal-delay-1 flex items-center gap-4 border-b border-slate-200 pb-3">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></div>
+                                            <span class="mask-reveal-content text-[12px] font-black text-slate-500 uppercase tracking-widest">MMUST Certification</span>
+                                        </div>
+                                        <div class="mask-reveal mask-reveal-delay-2 flex items-center gap-4 border-b border-slate-200 pb-3">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></div>
+                                            <span class="mask-reveal-content text-[12px] font-black text-slate-500 uppercase tracking-widest">Verified Performance</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div onclick="toggleCard(this)" class="expand-card cursor-pointer group">
+                        <div class="space-y-10">
+                            <div class="flex justify-between items-center">
+                                <div class="w-20 h-20 bg-primary text-white rounded-[2.5rem] flex items-center justify-center shadow-2xl shadow-primary/30 group-hover:bg-secondary transition-all duration-500">
+                                    <span class="material-symbols-outlined text-4xl">monitoring</span>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-200 card-icon text-5xl transition-all duration-500">expand_circle_right</span>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="text-3xl font-black text-primary uppercase tracking-tight leading-none">Analytics</h4>
+                                <div class="h-1.5 w-12 bg-secondary rounded-full group-hover:w-full transition-all duration-700"></div>
+                                
+                                <div class="mask-container">
+                                    <div class="mask-reveal">
+                                        <p class="mask-reveal-content text-primary text-xl leading-relaxed font-black mb-8">Dynamic Result Visualization.</p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="mask-reveal mask-reveal-delay-1 flex items-center gap-4 border-b border-slate-200 pb-3">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></div>
+                                            <span class="mask-reveal-content text-[12px] font-black text-slate-500 uppercase tracking-widest">CBC Metric Analysis</span>
+                                        </div>
+                                        <div class="mask-reveal mask-reveal-delay-2 flex items-center gap-4 border-b border-slate-200 pb-3">
+                                            <div class="w-2.5 h-2.5 rounded-full bg-secondary shrink-0"></div>
+                                            <span class="mask-reveal-content text-[12px] font-black text-slate-500 uppercase tracking-widest">Exam History Vault</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Statistics Section -->
+        <section class="py-48 bg-slate-900 transition-trigger overflow-hidden relative" id="impact-section">
+            <div class="max-w-7xl mx-auto px-8 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-24">
+                    <div class="text-center space-y-6">
+                        <div class="text-8xl font-black text-white tracking-tighter">150+</div>
+                        <div class="text-[11px] font-black text-blue-300 uppercase tracking-[0.8em]">Institutions</div>
+                    </div>
+                    <div class="text-center space-y-6 md:border-x border-white/10 px-8">
+                        <div class="text-8xl font-black text-secondary tracking-tighter">47</div>
+                        <div class="text-[11px] font-black text-blue-300 uppercase tracking-[0.8em]">Counties</div>
+                    </div>
+                    <div class="text-center space-y-6">
+                        <div class="text-8xl font-black text-white tracking-tighter">5K</div>
+                        <div class="text-[11px] font-black text-blue-300 uppercase tracking-[0.8em]">Annual Rate</div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-br from-primary to-slate-900 opacity-80"></div>
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 80px 80px;"></div>
+        </section>
+    </main>
+
+    <footer class="bg-white py-24 px-8 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20">
+            <div class="space-y-10">
+                <img src="logo/logo.png" alt="TOVUTISHA" class="h-12 w-auto">
+                <p class="text-slate-500 text-lg leading-relaxed max-w-sm font-medium">An institutional initiative dedicated to the digital transformation of Kenyan educational landscapes.</p>
+            </div>
+            <div class="space-y-10">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-primary">Navigation</h4>
+                <nav class="flex flex-col space-y-5 text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">
+                    <a class="hover:text-primary transition-colors" href="index.html">Home</a>
+                    <a class="hover:text-primary transition-colors" href="schools.html">Schools Directory</a>
+                    <a class="hover:text-primary transition-colors" href="about.html">About Initiative</a>
+                </nav>
+            </div>
+            <div class="space-y-10">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-primary">Legal Framework</h4>
+                <nav class="flex flex-col space-y-5 text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">
+                    <a class="hover:text-primary transition-colors" href="privacy.html">Privacy Policy</a>
+                    <a class="hover:text-primary transition-colors" href="terms.html">Terms of Service</a>
+                </nav>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-12 border-t border-slate-50 text-center">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300">© 2024 TOVUTISHA. AN MMUST OUTREACH PROJECT.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            icon.innerText = menu.classList.contains('hidden') ? 'menu' : 'close';
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up, .transition-trigger').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            const parallax = document.getElementById('hero-parallax');
+            if (parallax) parallax.style.transform = `translateY(${scroll * 0.5}px)`;
+        });
+
+        function toggleCard(card) {
+            const isOpen = card.classList.contains('open');
+            document.querySelectorAll('.expand-card').forEach(c => {
+                c.classList.remove('open');
+                c.querySelector('.card-icon').innerText = 'expand_circle_right';
+            });
+            if (!isOpen) {
+                card.classList.add('open');
+                card.querySelector('.card-icon').innerText = 'cancel';
+            }
+        }
+
+        function loadAboutData() {
+            const aboutData = JSON.parse(localStorage.getItem('aboutContent') || '{}');
+            if(aboutData.heroTitle) document.getElementById('about-hero-title').innerText = aboutData.heroTitle;
+            if(aboutData.heroSubtitle) document.getElementById('about-hero-subtitle').innerText = aboutData.heroSubtitle;
+        }
+        loadAboutData();
+    </script>
+</body>
+</html>
