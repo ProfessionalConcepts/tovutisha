@@ -12,12 +12,7 @@
         darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-                    "primary": "#002045",
-                    "secondary": "#875200",
-                    "background": "#f7fafc",
-                    "surface": "#ffffff"
-            }
+            "colors": { "primary": "#002045", "secondary": "#875200", "background": "#f7fafc", "surface": "#ffffff" }
           },
         },
       }
@@ -29,6 +24,10 @@
     </style>
 </head>
 <body class="bg-[#f7fafc] text-on-background selection:bg-primary/10">
+    <div id="auth-overlay" class="fixed inset-0 bg-white z-[100] flex items-center justify-center font-bold text-slate-400 uppercase tracking-widest text-xs">
+        Establishing Secure Admin Connection...
+    </div>
+
     <aside class="h-screen w-64 fixed left-0 top-0 bg-white border-r border-slate-100 flex flex-col py-6 space-y-2 z-40">
         <div class="px-8 mb-8"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-8 w-auto"></a></div>
         <nav class="flex-1 flex flex-col space-y-1 text-sm font-medium">
@@ -36,25 +35,24 @@
                 <span class="material-symbols-outlined">description</span>
                 <span>Applications</span>
             </button>
-            <button onclick="showSection('dir')" id="nav-dir" class="flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50">
+            <button onclick="showSection('dir')" id="nav-dir" class="flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50 transition-all">
                 <span class="material-symbols-outlined">school</span>
                 <span>Directory</span>
             </button>
-            <button onclick="showSection('settings')" id="nav-settings" class="flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50">
+            <button onclick="showSection('settings')" id="nav-settings" class="flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50 transition-all">
                 <span class="material-symbols-outlined">settings</span>
-                <span>Site Settings</span>
+                <span>Site Content</span>
             </button>
-            <a href="index.html" class="flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50 mt-auto">
+            <button id="logout-btn" class="flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50 mt-auto">
                 <span class="material-symbols-outlined">logout</span>
                 <span>Logout</span>
-            </a>
+            </button>
         </nav>
     </aside>
 
-    <main class="ml-64 p-8 lg:p-12">
-        <!-- Applications -->
+    <main class="ml-64 p-8 lg:p-12 min-h-screen">
         <div id="section-apps">
-            <header class="mb-10"><h1 class="text-4xl font-black tracking-tight text-primary">Applications</h1></header>
+            <header class="mb-10"><h1 class="text-4xl font-black tracking-tight text-primary uppercase">Pending Applications</h1></header>
             <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
                 <table class="w-full text-left">
                     <thead class="bg-slate-50 text-[10px] font-bold uppercase tracking-widest text-slate-400">
@@ -65,19 +63,19 @@
             </div>
         </div>
 
-        <!-- Directory -->
         <div id="section-dir" class="hidden">
             <header class="mb-10 flex justify-between items-end">
-                <h1 class="text-4xl font-black tracking-tight text-primary">Manage Directory</h1>
-                <button onclick="openAddModal()" class="bg-primary text-white px-6 py-3 rounded-xl font-bold">Add School</button>
+                <h1 class="text-4xl font-black tracking-tight text-primary uppercase">Institution Directory</h1>
+                <button onclick="openAddModal()" class="bg-primary text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+                    <span class="material-symbols-outlined">add</span> Add New
+                </button>
             </header>
             <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
                 <table class="w-full text-left text-sm">
                     <thead class="bg-slate-50 text-[10px] font-bold uppercase tracking-widest text-slate-400">
                         <tr>
                             <th class="px-6 py-4">Name</th>
-                            <th class="px-6 py-4">Type/Curriculum</th>
-                            <th class="px-6 py-4">Population</th>
+                            <th class="px-6 py-4">Status/Curriculum</th>
                             <th class="px-6 py-4">Featured</th>
                             <th class="px-6 py-4 text-right">Action</th>
                         </tr>
@@ -87,357 +85,259 @@
             </div>
         </div>
 
-        <!-- Site Settings -->
         <div id="section-settings" class="hidden">
-            <header class="mb-10"><h1 class="text-4xl font-black tracking-tight text-primary">Site Content Settings</h1></header>
+            <header class="mb-10"><h1 class="text-4xl font-black tracking-tight text-primary uppercase">Site Management</h1></header>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-                    <h2 class="text-lg font-bold text-primary mb-6 uppercase">Hero Content</h2>
+                    <h2 class="text-lg font-bold text-primary mb-6 uppercase tracking-tight">Homepage Hero</h2>
                     <form id="heroForm" class="space-y-4">
                         <input name="title" placeholder="Hero Title" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
                         <textarea name="subtitle" placeholder="Hero Subtitle" rows="3" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
-                        <input name="floatingText" placeholder="Floating Card Text" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                        <button type="submit" class="w-full bg-primary text-white py-4 rounded-xl font-bold">Update Hero</button>
-                    </form>
-                </div>
-                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2">
-                    <h2 class="text-lg font-bold text-primary mb-6 uppercase">Schools Directory Settings</h2>
-                    <form id="dirSettingsForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <textarea name="description" placeholder="Directory Description" rows="3" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
-                        <div class="space-y-4">
-                            <input name="spotlightTitle" placeholder="Spotlight Title" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                            <textarea name="spotlightText" placeholder="Spotlight Text" rows="2" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="md:col-span-2 bg-primary text-white py-4 rounded-xl font-bold">Update Directory Settings</button>
-                    </form>
-                </div>
-                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2">
-                    <h2 class="text-lg font-bold text-primary mb-6 uppercase">Partner Links & Footer</h2>
-                    <form id="partnerForm" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-slate-400">MMUST URL</label>
-                            <input name="mmustUrl" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-slate-400">KoTDA URL</label>
-                            <input name="kotdaUrl" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                        </div>
-                        <div class="space-y-1">
-                            <label class="text-[10px] font-bold uppercase text-slate-400">Ministry URL</label>
-                            <input name="ministryUrl" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                        </div>
-                        <button type="submit" class="md:col-span-3 bg-primary text-white py-4 rounded-xl font-bold">Update Partner Links</button>
-                    </form>
-                </div>
-                <!-- Legal Settings -->
-                <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2">
-                    <h2 class="text-lg font-bold text-primary mb-6 uppercase">Legal Pages Content</h2>
-                    <form id="legalSettingsForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-4">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase">Privacy Policy</h3>
-                            <input name="privacyTitle" placeholder="Privacy Title" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                            <textarea name="privacyContent" placeholder="Privacy Content (HTML allowed)" rows="6" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
-                        </div>
-                        <div class="space-y-4">
-                            <h3 class="text-xs font-bold text-slate-400 uppercase">Terms of Service</h3>
-                            <input name="termsTitle" placeholder="Terms Title" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                            <textarea name="termsContent" placeholder="Terms Content (HTML allowed)" rows="6" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
-                        </div>
-                        <button type="submit" class="md:col-span-2 bg-primary text-white py-4 rounded-xl font-bold">Update Legal Content</button>
+                        <button type="submit" class="w-full bg-primary text-white py-4 rounded-xl font-bold">Update Content</button>
                     </form>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- School Modal -->
+    <!-- Review Application Modal -->
+    <div id="reviewModal" class="fixed inset-0 bg-primary/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-6">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-3xl p-10 space-y-8 max-h-[90vh] overflow-y-auto no-scrollbar shadow-2xl">
+            <div class="flex justify-between items-start">
+                <h2 class="text-2xl font-black text-primary uppercase">Review Application</h2>
+                <button onclick="closeReviewModal()" class="text-slate-300 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div id="reviewDetails" class="grid grid-cols-2 gap-8 text-sm"></div>
+            <div class="space-y-4 pt-6 border-t border-slate-50">
+                <textarea id="rejectionMsg" placeholder="Instructions for user if rejected..." class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 text-sm resize-none"></textarea>
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="rejectBtn" class="bg-red-50 text-red-600 py-4 rounded-xl font-black uppercase tracking-widest text-xs">Deny Application</button>
+                    <button id="approveBtn" class="bg-primary text-white py-4 rounded-xl font-black uppercase tracking-widest text-xs">Approve & Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit/Add School Modal -->
     <div id="addModal" class="fixed inset-0 bg-primary/40 backdrop-blur-sm z-50 flex items-center justify-center hidden p-6">
-        <div class="bg-white rounded-3xl w-full max-w-2xl p-8 space-y-6 max-h-[90vh] overflow-y-auto no-scrollbar">
-            <div class="flex justify-between items-center">
-                <h2 id="modalTitle" class="text-xl font-black text-primary uppercase">Add School</h2>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">close</span></button>
+        <div class="bg-white rounded-[2.5rem] w-full max-w-2xl p-10 space-y-8 max-h-[90vh] overflow-y-auto no-scrollbar shadow-2xl">
+            <div class="flex justify-between items-start">
+                <h2 id="modalTitle" class="text-2xl font-black text-primary uppercase">Institution Details</h2>
+                <button onclick="closeModal()" class="text-slate-300 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
             </div>
             <form id="addForm" class="space-y-6">
-                <input type="hidden" name="editIndex" id="editIndex" value="-1">
-                <div class="grid grid-cols-2 gap-4">
+                <input type="hidden" name="id" id="schoolId">
+                <div class="grid grid-cols-2 gap-6">
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">School Name</label>
-                        <input name="name" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4" required>
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">School Name</label>
+                        <input name="name" placeholder="School Name" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4" required>
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">School Portfolio URL</label>
-                        <input name="portfolio" placeholder="https://..." class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
-                    </div>
-                </div>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Status</label>
-                        <select name="type" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
-                            <option>Public</option><option>Private</option><option>International</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Curriculum</label>
-                        <select name="curriculum" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
-                            <option>CBC</option><option>8-4-4 Legacy</option><option>International</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Population</label>
-                        <input name="population" type="number" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none" placeholder="e.g. 1200">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Website URL</label>
+                        <input name="website" placeholder="Website URL" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-6">
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Gender</label>
-                        <select name="gender" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
-                            <option>Mixed</option><option>Boys Only</option><option>Girls Only</option>
-                        </select>
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Type</label>
+                        <select name="type" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4"><option>Public</option><option>Private</option><option>International</option></select>
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Boarding</label>
-                        <select name="boarding" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 outline-none">
-                            <option>Day Only</option><option>Boarding Only</option><option>Day & Boarding</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Cover Photo URL</label>
-                        <input name="photo" placeholder="https://..." class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Curriculum</label>
+                        <select name="curriculum" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4"><option>CBC</option><option>8-4-4</option><option>International</option></select>
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Logo/Profile URL</label>
-                        <input name="logo" placeholder="https://..." class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Population</label>
+                        <input name="population" type="number" placeholder="Population" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
                     </div>
-                </div>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="space-y-1"><label class="text-[10px] font-bold uppercase text-slate-400">County</label><input name="county" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4" required></div>
-                    <div class="space-y-1"><label class="text-[10px] font-bold uppercase text-slate-400">Map Lat</label><input name="lat" placeholder="-1.286" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4"></div>
-                    <div class="space-y-1"><label class="text-[10px] font-bold uppercase text-slate-400">Map Lng</label><input name="lng" placeholder="36.817" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4"></div>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-[10px] font-bold uppercase text-slate-400">Academic Excellence Highlights</label>
-                    <textarea name="excellence" rows="3" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 resize-none"></textarea>
+                    <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Manual Address / Location</label>
+                    <input name="address" placeholder="Physical Address" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 gap-6">
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Exam Results Photo URL</label>
-                        <input name="resultsPhoto" placeholder="https://..." class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Cover Photo (Local/URL)</label>
+                        <input type="file" name="photoFile" accept="image/*" class="w-full text-[10px]">
+                        <input name="photo" placeholder="Photo URL" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 mt-2">
                     </div>
                     <div class="space-y-1">
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Exam Results Doc URL (PDF/Excel)</label>
-                        <input name="resultsDoc" placeholder="https://..." class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Logo (Local/URL)</label>
+                        <input type="file" name="logoFile" accept="image/*" class="w-full text-[10px]">
+                        <input name="logo" placeholder="Logo URL" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 mt-2">
                     </div>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="space-y-1">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Latitude</label>
+                        <input name="lat" placeholder="Latitude" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[9px] font-black uppercase tracking-widest text-slate-400 px-1">Longitude</label>
+                        <input name="lng" placeholder="Longitude" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4">
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
                     <input type="checkbox" name="featured" id="feat" class="rounded text-primary">
                     <label for="feat" class="text-sm font-bold text-slate-600">Feature on Home</label>
                 </div>
-                <button type="submit" class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg">Save School Details</button>
+                <button type="submit" id="save-btn" class="w-full bg-primary text-white py-5 rounded-2xl font-black uppercase tracking-widest">Save Institution</button>
             </form>
         </div>
     </div>
 
-    <script>
-        function showSection(s) {
+    <script type="module">
+        import { auth, db, storage } from './js/firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { collection, onSnapshot, doc, getDoc, setDoc, addDoc, deleteDoc, updateDoc, query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
+
+        let apps = [];
+        let schools = [];
+        let activeAppId = null;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user && user.email.includes('admin')) {
+                document.getElementById('auth-overlay').classList.add('hidden');
+                init();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            signOut(auth).then(() => window.location.href = 'login.html');
+        });
+
+        function init() {
+            onSnapshot(query(collection(db, "applications"), where("status", "==", "pending")), (snap) => {
+                apps = snap.docs.map(d => ({id: d.id, ...d.data()}));
+                document.getElementById('appsTable').innerHTML = apps.map(a => `
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-5 font-bold text-primary uppercase text-xs">${a.schoolName}</td>
+                        <td class="px-6 py-5 text-right"><button onclick="window.reviewApp('${a.id}')" class="bg-primary text-white px-4 py-2 rounded-lg font-black uppercase tracking-widest text-[10px]">Review</button></td>
+                    </tr>`).join('');
+            });
+
+            onSnapshot(collection(db, "schools"), (snap) => {
+                schools = snap.docs.map(d => ({id: d.id, ...d.data()}));
+                document.getElementById('dirTable').innerHTML = schools.map(s => `
+                    <tr>
+                        <td class="px-6 py-4 font-bold text-primary uppercase text-xs">${s.name}</td>
+                        <td class="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">${s.type} / ${s.curriculum}</td>
+                        <td class="px-6 py-4"><input type="checkbox" ${s.featured?'checked':''} onchange="window.toggleFeat('${s.id}', ${!s.featured})"></td>
+                        <td class="px-6 py-4 text-right space-x-3">
+                            <button onclick="window.openAddModal('${s.id}')" class="text-primary font-bold text-xs underline">Edit</button>
+                            <button onclick="window.delSchool('${s.id}')" class="text-red-500 font-bold text-xs underline">Del</button>
+                        </td>
+                    </tr>`).join('');
+            });
+        }
+
+        window.showSection = (s) => {
             ['apps', 'dir', 'settings'].forEach(id => {
                 document.getElementById('section-'+id).classList.toggle('hidden', id !== s);
                 document.getElementById('nav-'+id).className = id === s ? 'flex items-center space-x-3 px-8 py-3 bg-primary/5 text-primary border-r-4 border-primary font-bold' : 'flex items-center space-x-3 px-8 py-3 text-slate-500 hover:bg-slate-50';
             });
-            if(s === 'apps') renderApps(); else if(s === 'dir') renderDir(); else loadSettings();
+        };
+
+        window.reviewApp = (id) => {
+            activeAppId = id;
+            const a = apps.find(x => x.id === id);
+            document.getElementById('reviewDetails').innerHTML = `
+                <div class="space-y-4">
+                    <div><label class="text-[10px] font-black uppercase tracking-widest text-slate-400">School</label><p class="font-bold text-primary">${a.schoolName}</p></div>
+                    <div><label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Address</label><p class="font-bold text-slate-500 italic">${a.address || 'N/A'}</p></div>
+                    <div><label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Type/Curriculum</label><p class="font-bold text-primary uppercase">${a.type} / ${a.curriculum}</p></div>
+                </div>
+                <div class="space-y-4">
+                    <div><label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Documentation</label><p><a href="${a.docUrl}" target="_blank" class="text-secondary underline font-bold">View Local PDF</a></p></div>
+                    <div><label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Dev Notes</label><p class="text-slate-500 leading-relaxed italic">"${a.devNotes}"</p></div>
+                </div>
+            `;
+            document.getElementById('reviewModal').classList.remove('hidden');
+        };
+
+        window.closeReviewModal = () => document.getElementById('reviewModal').classList.add('hidden');
+
+        document.getElementById('approveBtn').onclick = async () => {
+            const a = apps.find(x => x.id === activeAppId);
+            await addDoc(collection(db, "schools"), {
+                name: a.schoolName, type: a.type, curriculum: a.curriculum, 
+                population: a.population, photo: a.photoUrl, logo: a.logoUrl,
+                address: a.address || '', website: '', lat: 0, lng: 0, 
+                featured: false, excellence: a.devNotes
+            });
+            await updateDoc(doc(db, "applications", activeAppId), { status: 'approved' });
+            window.closeReviewModal();
+            alert("Published to National Directory!");
+        };
+
+        document.getElementById('rejectBtn').onclick = async () => {
+            const msg = document.getElementById('rejectionMsg').value || "Incomplete documentation.";
+            await updateDoc(doc(db, "applications", activeAppId), { 
+                status: 'rejected', 
+                rejectionMessage: msg 
+            });
+            window.closeReviewModal();
+            alert("User notified of rejection.");
+        };
+
+        window.toggleFeat = async (id, val) => await updateDoc(doc(db, "schools", id), { featured: val });
+        window.delSchool = async (id) => { if(confirm('Delete permanently?')) await deleteDoc(doc(db, "schools", id)); };
+
+        async function uploadFile(file, path) {
+            if(!file || file.size === 0) return null;
+            const sRef = ref(storage, `admin_uploads/${path}_${Date.now()}`);
+            await uploadBytes(sRef, file);
+            return await getDownloadURL(sRef);
         }
-        
-        function openAddModal(editIdx = -1) {
+
+        window.openAddModal = (id = null) => {
             const form = document.getElementById('addForm');
             form.reset();
-            document.getElementById('editIndex').value = editIdx;
-            document.getElementById('modalTitle').innerText = editIdx === -1 ? 'Add School' : 'Edit School';
-            
-            if (editIdx !== -1) {
-                const s = JSON.parse(localStorage.getItem('schools') || '[]')[editIdx];
-                form.name.value = s.name;
-                form.website.value = s.website || '';
-                form.type.value = s.type || 'Public';
-                form.curriculum.value = s.curriculum;
-                form.population.value = s.population || '';
-                form.photo.value = s.photo || '';
-                form.logo.value = s.logo || '';
-                form.county.value = s.county;
-                form.lat.value = s.lat || '';
-                form.lng.value = s.lng || '';
-                form.excellence.value = s.excellence || '';
-                form.resultsPhoto.value = s.resultsPhoto || '';
-                form.resultsDoc.value = s.resultsDoc || '';
+            document.getElementById('schoolId').value = id || '';
+            document.getElementById('modalTitle').innerText = id ? 'Edit Institution' : 'Add Institution';
+            if(id) {
+                const s = schools.find(sch => sch.id === id);
+                form.name.value = s.name; form.website.value = s.website || '';
+                form.type.value = s.type; form.curriculum.value = s.curriculum;
+                form.population.value = s.population || ''; form.lat.value = s.lat || '';
+                form.lng.value = s.lng || ''; form.photo.value = s.photo || '';
+                form.logo.value = s.logo || ''; form.address.value = s.address || '';
                 document.getElementById('feat').checked = s.featured;
             }
             document.getElementById('addModal').classList.remove('hidden');
-        }
-        
-        function closeModal() { document.getElementById('addModal').classList.add('hidden'); }
+        };
 
-        function renderDir() {
-            const s = JSON.parse(localStorage.getItem('schools') || '[]');
-            document.getElementById('dirTable').innerHTML = s.map((sch, i) => `
-                <tr class="hover:bg-slate-50">
-                    <td class="px-6 py-4 font-bold text-primary">${sch.name}</td>
-                    <td class="px-6 py-4 text-xs font-medium text-slate-500">${sch.type} / ${sch.curriculum}</td>
-                    <td class="px-6 py-4 font-bold text-slate-600">${sch.population || 'N/A'}</td>
-                    <td class="px-6 py-4"><input type="checkbox" ${sch.featured?'checked':''} onchange="toggleFeat(${i})"></td>
-                    <td class="px-6 py-4 text-right space-x-3">
-                        <button onclick="openAddModal(${i})" class="text-primary font-bold text-xs hover:underline">Edit</button>
-                        <button onclick="del(${i})" class="text-red-500 font-bold text-xs hover:underline">Delete</button>
-                    </td>
-                </tr>`).join('');
-        }
+        window.closeModal = () => document.getElementById('addModal').classList.add('hidden');
 
-        document.getElementById('addForm').addEventListener('submit', function(e) {
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const fd = new FormData(this);
-            const idx = parseInt(fd.get('editIndex'));
-            const s = JSON.parse(localStorage.getItem('schools') || '[]');
+            const btn = document.getElementById('save-btn');
+            btn.disabled = true; btn.innerText = "Processing Assets...";
+
+            const fd = new FormData(e.target);
+            const id = document.getElementById('schoolId').value;
             
-            const schoolData = {
-                name: fd.get('name'),
-                website: fd.get('website'),
-                type: fd.get('type'),
-                curriculum: fd.get('curriculum'),
-                population: fd.get('population'),
-                photo: fd.get('photo'),
-                logo: fd.get('logo'),
-                county: fd.get('county'),
-                lat: fd.get('lat'),
-                lng: fd.get('lng'),
-                excellence: fd.get('excellence'),
-                resultsPhoto: fd.get('resultsPhoto'),
-                resultsDoc: fd.get('resultsDoc'),
-                featured: document.getElementById('feat').checked
-            };
+            try {
+                const photoUrl = await uploadFile(fd.get('photoFile'), 'photo') || fd.get('photo');
+                const logoUrl = await uploadFile(fd.get('logoFile'), 'logo') || fd.get('logo');
 
-            if (idx === -1) s.push(schoolData); else s[idx] = schoolData;
-            
-            localStorage.setItem('schools', JSON.stringify(s));
-            closeModal(); renderDir();
+                const data = {
+                    name: fd.get('name'), website: fd.get('website'), type: fd.get('type'),
+                    curriculum: fd.get('curriculum'), population: parseInt(fd.get('population')) || 0,
+                    address: fd.get('address'), lat: parseFloat(fd.get('lat')) || 0, 
+                    lng: parseFloat(fd.get('lng')) || 0, photo: photoUrl, logo: logoUrl,
+                    featured: document.getElementById('feat').checked
+                };
+
+                if(id) await updateDoc(doc(db, "schools", id), data);
+                else await addDoc(collection(db, "schools"), data);
+                window.closeModal();
+            } catch (err) { alert(err.message); }
+            finally { btn.disabled = false; btn.innerText = "Save Institution"; }
         });
-
-        function renderApps() {
-            const apps = JSON.parse(localStorage.getItem('applications') || '[]');
-            document.getElementById('appsTable').innerHTML = apps.map((a, i) => `
-                <tr class="hover:bg-slate-50">
-                    <td class="px-6 py-4">
-                        <div class="font-bold text-primary">${a.schoolName}</div>
-                        <div class="flex gap-2 mt-1">
-                            ${a.portfolio ? `<a href="${a.portfolio}" target="_blank" class="text-[9px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-bold uppercase">Portfolio</a>` : ''}
-                            ${a.resultsDoc ? `<a href="${a.resultsDoc}" target="_blank" class="text-[9px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-bold uppercase">Results</a>` : ''}
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-right"><button onclick="approve(${i})" class="text-primary font-bold text-xs underline">Approve</button></td>
-                </tr>`).join('');
-        }
-        
-        function approve(i) {
-            const apps = JSON.parse(localStorage.getItem('applications') || '[]');
-            const a = apps.splice(i, 1)[0];
-            const s = JSON.parse(localStorage.getItem('schools') || '[]');
-            s.push({ 
-                name: a.schoolName, 
-                curriculum: a.curriculum, 
-                type: a.schoolType, 
-                county: a.county, 
-                excellence: a.message, 
-                portfolio: a.portfolio,
-                resultsDoc: a.resultsDoc,
-                featured: false 
-            });
-            localStorage.setItem('applications', JSON.stringify(apps));
-            localStorage.setItem('schools', JSON.stringify(s));
-            renderApps();
-        }
-
-        function toggleFeat(i) {
-            const s = JSON.parse(localStorage.getItem('schools') || '[]');
-            s[i].featured = !s[i].featured;
-            localStorage.setItem('schools', JSON.stringify(s));
-        }
-        
-        function del(i) {
-            if(confirm('Delete school?')) {
-                const s = JSON.parse(localStorage.getItem('schools') || '[]');
-                s.splice(i, 1);
-                localStorage.setItem('schools', JSON.stringify(s));
-                renderDir();
-            }
-        }
-
-        function loadSettings() {
-            const data = JSON.parse(localStorage.getItem('homeContent') || '{}');
-            if(data.hero) {
-                const f = document.getElementById('heroForm');
-                f.title.value = data.hero.title; f.subtitle.value = data.hero.subtitle; f.floatingText.value = data.hero.floatingText;
-            }
-            const dirData = JSON.parse(localStorage.getItem('directorySettings') || '{}');
-            const df = document.getElementById('dirSettingsForm');
-            df.description.value = dirData.description || '';
-            df.spotlightTitle.value = dirData.spotlightTitle || '';
-            df.spotlightText.value = dirData.spotlightText || '';
-
-            const legalData = JSON.parse(localStorage.getItem('legalSettings') || '{}');
-            const lf = document.getElementById('legalSettingsForm');
-            lf.privacyTitle.value = legalData.privacyTitle || '';
-            lf.privacyContent.value = legalData.privacyContent || '';
-            lf.termsTitle.value = legalData.termsTitle || '';
-            lf.termsContent.value = legalData.termsContent || '';
-
-            const partnerData = JSON.parse(localStorage.getItem('partnerLinks') || '{}');
-            const pf = document.getElementById('partnerForm');
-            pf.mmustUrl.value = partnerData.mmustUrl || '';
-            pf.kotdaUrl.value = partnerData.kotdaUrl || '';
-            pf.ministryUrl.value = partnerData.ministryUrl || '';
-        }
-
-        document.getElementById('partnerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            const data = {
-                mmustUrl: fd.get('mmustUrl'),
-                kotdaUrl: fd.get('kotdaUrl'),
-                ministryUrl: fd.get('ministryUrl')
-            };
-            localStorage.setItem('partnerLinks', JSON.stringify(data));
-            alert('Partner links updated!');
-        });
-
-        document.getElementById('legalSettingsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            const data = {
-                privacyTitle: fd.get('privacyTitle'),
-                privacyContent: fd.get('privacyContent'),
-                termsTitle: fd.get('termsTitle'),
-                termsContent: fd.get('termsContent')
-            };
-            localStorage.setItem('legalSettings', JSON.stringify(data));
-            alert('Legal pages updated!');
-        });
-
-        document.getElementById('heroForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            const data = JSON.parse(localStorage.getItem('homeContent') || '{}');
-            data.hero = { title: fd.get('title'), subtitle: fd.get('subtitle'), floatingText: fd.get('floatingText') };
-            localStorage.setItem('homeContent', JSON.stringify(data));
-            alert('Hero updated!');
-        });
-
-        document.getElementById('dirSettingsForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const fd = new FormData(this);
-            const data = { description: fd.get('description'), spotlightTitle: fd.get('spotlightTitle'), spotlightText: fd.get('spotlightText') };
-            localStorage.setItem('directorySettings', JSON.stringify(data));
-            alert('Directory settings updated!');
-        });
-
-        renderApps();
     </script>
 </body>
 </html>

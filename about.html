@@ -382,13 +382,16 @@
         </div>
     </footer>
 
-    <script>
-        function toggleMobileMenu() {
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        window.toggleMobileMenu = () => {
             const menu = document.getElementById('mobile-menu');
             const icon = document.getElementById('menu-icon');
             menu.classList.toggle('hidden');
             icon.innerText = menu.classList.contains('hidden') ? 'menu' : 'close';
-        }
+        };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -404,7 +407,7 @@
             if (parallax) parallax.style.transform = `translateY(${scroll * 0.5}px)`;
         });
 
-        function toggleCard(card) {
+        window.toggleCard = (card) => {
             const isOpen = card.classList.contains('open');
             document.querySelectorAll('.expand-card').forEach(c => {
                 c.classList.remove('open');
@@ -416,11 +419,14 @@
             }
         }
 
-        function loadAboutData() {
-            const aboutData = JSON.parse(localStorage.getItem('aboutContent') || '{}');
-            if(aboutData.heroTitle) document.getElementById('about-hero-title').innerText = aboutData.heroTitle;
-            if(aboutData.heroSubtitle) document.getElementById('about-hero-subtitle').innerText = aboutData.heroSubtitle;
-        }
+        const loadAboutData = async () => {
+            const snap = await getDoc(doc(db, "settings", "about"));
+            if(snap.exists()){
+                const d = snap.data();
+                if(d.title) document.getElementById('about-hero-title').innerText = d.title;
+                if(d.subtitle) document.getElementById('about-hero-subtitle').innerText = d.subtitle;
+            }
+        };
         loadAboutData();
     </script>
 </body>

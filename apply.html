@@ -1,165 +1,253 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Apply - TOVUTISHA</title>
+    <title>Institutional Application | TOVUTISHA</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
-            "colors": {
-                    "primary": "#002045",
-                    "secondary": "#875200",
-                    "background": "#f7fafc",
-                    "surface": "#ffffff"
-            }
+            "colors": { "primary": "#002045", "secondary": "#875200", "background": "#f7fafc", "surface": "#ffffff" }
           },
         },
       }
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        body { font-family: 'Inter', sans-serif; }
-        .glass-nav { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .upload-area { border: 2px dashed #e2e8f0; transition: all 0.3s ease; }
+        .upload-area:hover { border-color: #002045; background: #f8fafc; }
     </style>
 </head>
-<body class="bg-[#f7fafc] text-on-surface">
-<nav class="sticky top-0 z-50 glass-nav bg-slate-50/80 dark:bg-slate-950/80 w-full border-b border-slate-100">
-    <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto w-full font-inter text-sm tracking-tight">
-        <div class="text-xl font-black tracking-tighter text-primary uppercase"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto"></a></div>
-        <div class="hidden md:flex items-center space-x-8 font-bold">
-            <a class="text-slate-600 hover:text-primary transition-colors" href="index.html">Home</a>
-            <a href="login.html" class="bg-slate-100 text-primary px-4 py-2 rounded-lg">Logout</a>
-        </div>
-        <button onclick="toggleMobileMenu()" class="md:hidden text-primary">
-            <span class="material-symbols-outlined" id="menu-icon">menu</span>
-        </button>
+<body class="bg-[#f7fafc] font-inter text-on-background selection:bg-primary/10">
+    <div id="auth-overlay" class="fixed inset-0 bg-white z-[100] flex items-center justify-center font-bold text-slate-400 uppercase tracking-widest text-xs">
+        Authenticating Secure Session...
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-100 p-6 space-y-4 animate-in slide-in-from-top duration-300">
-        <a class="block font-bold text-primary" href="index.html">Home</a>
-        <a class="block text-slate-600" href="schools.html">Schools</a>
-        <hr class="border-slate-50">
-        <a class="block font-bold text-primary" href="login.html">Logout</a>
-    </div>
-</nav>
 
-    <main class="max-w-7xl mx-auto px-8 py-12 md:py-20">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            <div class="lg:col-span-5 space-y-12">
-                <header class="space-y-6">
-                    <h1 class="text-5xl md:text-6xl font-black text-primary tracking-tight leading-[1.1]">Incorporate Your School into TOVUTISHA</h1>
-                    <div class="inline-flex items-center px-4 py-2 bg-slate-100 text-primary rounded-full text-xs font-bold tracking-widest uppercase">User Portal</div>
-                </header>
-                <div class="space-y-8">
-                    <div class="relative group p-8 rounded-xl bg-white border border-slate-100 transition-all">
-                        <div class="flex items-start gap-4">
-                            <span class="material-symbols-outlined text-secondary text-3xl">verified</span>
-                            <div>
-                                <h3 class="text-lg font-bold text-primary mb-1">MMUST Partner Endorsement</h3>
-                                <p class="text-slate-500 leading-relaxed text-sm">Gain institutional credibility through our direct partnership.</p>
-                            </div>
-                        </div>
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100 px-8 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-8 w-auto"></a>
+            <div class="flex items-center gap-6">
+                <span id="user-email" class="text-[10px] font-black uppercase tracking-widest text-slate-400"></span>
+                <button id="logout-btn" class="text-[10px] font-black uppercase tracking-widest text-red-500">Sign Out</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto py-12 px-6">
+        <div id="status-card" class="hidden mb-12 p-8 rounded-[2.5rem] border border-slate-100 bg-white shadow-xl">
+            <div class="flex items-center gap-6">
+                <div id="status-icon" class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"></div>
+                <div>
+                    <h2 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Application Status</h2>
+                    <p id="status-text" class="text-2xl font-black text-primary uppercase"></p>
+                </div>
+            </div>
+            <div id="rejection-box" class="hidden mt-6 p-6 bg-red-50 rounded-2xl border border-red-100 text-red-700 text-sm font-medium">
+                <p id="rejection-message"></p>
+                <p class="mt-2 text-xs font-bold uppercase tracking-wider">Follow the instructions above and resubmit your profile.</p>
+            </div>
+        </div>
+
+        <div id="app-form-container" class="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-2xl space-y-10">
+            <header class="space-y-2">
+                <h1 class="text-4xl font-black text-primary uppercase tracking-tighter">Institutional Profile</h1>
+                <p class="text-slate-500 font-medium">Complete your school's digital portfolio for the TOVUTISHA directory.</p>
+            </header>
+
+            <form id="apply-form" class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">School Name</label>
+                        <input name="schoolName" placeholder="Full Legal Name" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Institutional Population</label>
+                        <input name="population" type="number" placeholder="Estimated Enrollment" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10" required>
                     </div>
                 </div>
-            </div>
 
-            <div class="lg:col-span-7">
-                <div class="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
-                    <form id="incorporateForm" class="space-y-8">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">School Name</label>
-                                <input required name="schoolName" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">School Type</label>
-                                <select required name="schoolType" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0">
-                                    <option>Public</option>
-                                    <option>Private</option>
-                                    <option>International</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">County</label>
-                                <input required name="county" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Curriculum</label>
-                                <select required name="curriculum" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0">
-                                    <option>CBC</option>
-                                    <option>International</option>
-                                    <option>8-4-4</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Message / Academic Excellence Highlights</label>
-                            <textarea name="message" rows="4" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0 resize-none"></textarea>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">School Portfolio (Document URL)</label>
-                                <input name="portfolio" placeholder="Link to PDF/Portfolio" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Results Performance (Document URL)</label>
-                                <input name="resultsDoc" placeholder="Link to Exam Results PDF" class="w-full bg-slate-50 border-b-2 border-slate-200 border-t-0 border-x-0 focus:border-secondary focus:ring-0 py-3 px-0">
-                            </div>
-                        </div>
-                        <button type="submit" class="w-full bg-primary text-white font-bold py-5 rounded-xl shadow-lg shadow-primary/20 transition-all group">
-                            Submit Application
-                        </button>
-                    </form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Operational Status</label>
+                        <select name="type" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10">
+                            <option>Public</option><option>Private</option><option>International</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Active Curriculum</label>
+                        <select name="curriculum" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10">
+                            <option>CBC</option><option>8-4-4</option><option>International</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Manual Location / Address</label>
+                    <input name="address" placeholder="e.g. Off Thika Road, Juja, Kiambu" class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10" required>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Cover Photo (Local Upload)</label>
+                        <input type="file" name="photoFile" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-primary/5 file:text-primary hover:file:bg-primary/10 transition-all">
+                        <p class="text-[9px] text-slate-400 px-1 uppercase tracking-wider">Or provide URL below</p>
+                        <input name="photoUrl" placeholder="Direct Image URL" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-xs">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Institutional Logo (Local Upload)</label>
+                        <input type="file" name="logoFile" accept="image/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-primary/5 file:text-primary hover:file:bg-primary/10 transition-all">
+                        <p class="text-[9px] text-slate-400 px-1 uppercase tracking-wider">Or provide URL below</p>
+                        <input name="logoUrl" placeholder="Direct Logo URL" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-xs">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">School Documentation (PDF Upload)</label>
+                    <input type="file" name="docFile" accept=".pdf" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-primary/5 file:text-primary hover:file:bg-primary/10 transition-all">
+                    <p class="text-[9px] text-slate-400 px-1 uppercase tracking-wider">Or provide URL below</p>
+                    <input name="docUrl" placeholder="Direct PDF URL" class="w-full bg-slate-50 border-none rounded-xl py-3 px-4 text-xs">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 px-1">Message for Developers / Project Notes</label>
+                    <textarea name="devNotes" rows="5" placeholder="Include any specific instructions or requirements..." class="w-full bg-slate-50 border-none rounded-2xl py-4 px-6 focus:ring-2 focus:ring-primary/10 resize-none"></textarea>
+                </div>
+
+                <div id="upload-progress" class="hidden space-y-2">
+                    <div class="w-full bg-slate-100 rounded-full h-1.5">
+                        <div id="progress-bar" class="bg-primary h-1.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p class="text-[9px] font-black text-primary uppercase tracking-widest text-center">Uploading Institutional Assets...</p>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-primary text-white py-5 rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.01] transition-all">
+                    Finalize & Submit Application
+                </button>
+            </form>
         </div>
     </main>
 
-    <footer class="w-full py-12 px-8 border-t border-slate-200/30 bg-slate-50 flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex flex-col gap-2">
-            <a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-8 w-auto"></a>
-            <p class="font-inter text-xs tracking-wide uppercase text-blue-900">© 2024 TOVUTISHA. All Rights Reserved.</p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-8 font-inter text-xs tracking-wide uppercase">
-            <a class="text-slate-500 hover:text-primary transition-colors underline underline-offset-4" href="#">Privacy Policy</a>
-            <a class="text-slate-500 hover:text-primary transition-colors underline underline-offset-4" href="#">Terms of Service</a>
-        </div>
-    </footer>
+    <script type="module">
+        import { auth, db, storage } from './js/firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+        import { doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
 
-    <script>
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const icon = document.getElementById('menu-icon');
-            menu.classList.toggle('hidden');
-            icon.innerText = menu.classList.contains('hidden') ? 'menu' : 'close';
+        let currentUser = null;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('user-email').innerText = user.email;
+                document.getElementById('auth-overlay').classList.add('hidden');
+                watchApplication(user.uid);
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.getElementById('logout-btn').onclick = () => signOut(auth);
+
+        function watchApplication(uid) {
+            onSnapshot(doc(db, "applications", uid), (snap) => {
+                if(snap.exists()) {
+                    const data = snap.data();
+                    const statusCard = document.getElementById('status-card');
+                    const formContainer = document.getElementById('app-form-container');
+                    const statusText = document.getElementById('status-text');
+                    const statusIcon = document.getElementById('status-icon');
+                    
+                    statusCard.classList.remove('hidden');
+                    statusText.innerText = data.status;
+                    
+                    const iconSpan = document.createElement('span');
+                    iconSpan.className = 'material-symbols-outlined';
+
+                    if(data.status === 'pending') {
+                        statusIcon.className = 'w-16 h-16 rounded-2xl flex items-center justify-center text-3xl bg-amber-100 text-amber-600';
+                        iconSpan.innerText = 'schedule';
+                        formContainer.classList.add('opacity-50', 'pointer-events-none');
+                    } else if(data.status === 'approved') {
+                        statusIcon.className = 'w-16 h-16 rounded-2xl flex items-center justify-center text-3xl bg-emerald-100 text-emerald-600';
+                        iconSpan.innerText = 'verified';
+                        formContainer.innerHTML = `<div class="text-center py-10 space-y-4">
+                            <span class="material-symbols-outlined text-6xl text-emerald-500">check_circle</span>
+                            <h2 class="text-2xl font-black text-primary uppercase">Institutional Portal Approved</h2>
+                            <p class="text-slate-500 font-medium">Your school is now visible in the national directory.</p>
+                            <button onclick="location.href='schools.html'" class="bg-primary text-white px-8 py-3 rounded-xl font-bold">View Listing</button>
+                        </div>`;
+                    } else if(data.status === 'rejected') {
+                        statusIcon.className = 'w-16 h-16 rounded-2xl flex items-center justify-center text-3xl bg-red-100 text-red-600';
+                        iconSpan.innerText = 'cancel';
+                        document.getElementById('rejection-box').classList.remove('hidden');
+                        document.getElementById('rejection-message').innerText = data.rejectionMessage || 'Information verification failed.';
+                        formContainer.classList.remove('opacity-50', 'pointer-events-none');
+                    }
+                    statusIcon.innerHTML = '';
+                    statusIcon.appendChild(iconSpan);
+                }
+            });
         }
 
-        document.getElementById('incorporateForm').addEventListener('submit', function(e) {
+        async function uploadFile(file, path) {
+            if(!file) return null;
+            const sRef = ref(storage, `applications/${currentUser.uid}/${path}_${Date.now()}`);
+            await uploadBytes(sRef, file);
+            return await getDownloadURL(sRef);
+        }
+
+        document.getElementById('apply-form').onsubmit = async (e) => {
             e.preventDefault();
-            const fd = new FormData(this);
-            const applications = JSON.parse(localStorage.getItem('applications') || '[]');
-            applications.push({
-                schoolName: fd.get('schoolName'),
-                schoolType: fd.get('schoolType'),
-                county: fd.get('county'),
-                curriculum: fd.get('curriculum'),
-                message: fd.get('message'),
-                portfolio: fd.get('portfolio'),
-                resultsDoc: fd.get('resultsDoc'),
-                date: new Date().toLocaleDateString()
-            });
-            localStorage.setItem('applications', JSON.stringify(applications));
-            alert('Application submitted! Redirecting to home...');
-            location.href = 'index.html';
-        });
+            const btn = document.getElementById('submit-btn');
+            const progress = document.getElementById('upload-progress');
+            const bar = document.getElementById('progress-bar');
+            
+            btn.disabled = true;
+            btn.innerText = "Processing Assets...";
+            progress.classList.remove('hidden');
+
+            const fd = new FormData(e.target);
+            
+            try {
+                bar.style.width = "20%";
+                const photoUrl = fd.get('photoFile').size > 0 ? await uploadFile(fd.get('photoFile'), 'photo') : fd.get('photoUrl');
+                bar.style.width = "50%";
+                const logoUrl = fd.get('logoFile').size > 0 ? await uploadFile(fd.get('logoFile'), 'logo') : fd.get('logoUrl');
+                bar.style.width = "80%";
+                const docUrl = fd.get('docFile').size > 0 ? await uploadFile(fd.get('docFile'), 'doc') : fd.get('docUrl');
+                bar.style.width = "100%";
+
+                const data = {
+                    userId: currentUser.uid,
+                    schoolName: fd.get('schoolName'),
+                    population: parseInt(fd.get('population')),
+                    type: fd.get('type'),
+                    curriculum: fd.get('curriculum'),
+                    address: fd.get('address'),
+                    photoUrl: photoUrl || '',
+                    logoUrl: logoUrl || '',
+                    docUrl: docUrl || '',
+                    devNotes: fd.get('devNotes'),
+                    status: 'pending',
+                    submittedAt: new Date().toISOString()
+                };
+
+                await setDoc(doc(db, "applications", currentUser.uid), data);
+                alert("Institutional profile submitted for verification.");
+            } catch (err) {
+                alert("Upload failed: " + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Finalize & Submit Application";
+                progress.classList.add('hidden');
+            }
+        };
     </script>
 </body>
 </html>
