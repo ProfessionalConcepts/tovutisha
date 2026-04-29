@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>TOVUTISHA | Affordable Kenyan School Websites</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -17,6 +17,10 @@
                         "secondary": "#875200",
                         "background": "#f7fafc",
                         "surface": "#ffffff"
+                },
+                "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"]
                 }
               },
             },
@@ -37,18 +41,51 @@
             background-position: center;
         }
         .slideshow-image.active { opacity: 0.3; }
+
+        /* Entrance Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Partners Carousel */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .carousel-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 40s linear infinite;
+        }
+        .carousel-track:hover { animation-play-state: paused; }
+
+        /* Storytelling Styles */
+        .story-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px -12px rgba(0, 32, 69, 0.15);
+        }
+        .text-balance { text-wrap: balance; }
     </style>
 </head>
-<body class="bg-background text-slate-900 font-inter">
+<body class="bg-background text-slate-900 font-body antialiased">
     <nav class="sticky top-0 z-50 glass-nav bg-white/80 dark:bg-slate-950/80 w-full border-b border-slate-100">
-        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto w-full font-inter text-sm tracking-tight">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto w-full font-body text-sm tracking-tight">
             <div class="text-xl font-black tracking-tighter text-blue-900 dark:text-white uppercase"><a href="index.html"><img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto"></a></div>
-            <div class="hidden md:flex items-center space-x-8">
+            <div class="hidden md:flex items-center space-x-8 font-semibold">
                 <a class="text-blue-900 dark:text-blue-100 font-bold border-b-2 border-primary pb-1" href="index.html">Home</a>
                 <a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="schools.html">Schools</a>
                 <a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 transition-colors" href="about.html">About</a>
                 <div class="flex items-center ml-4">
-                    <button onclick="location.href='login.html'" class="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all">Get Started</button>
+                    <button onclick="location.href='login.html'" class="bg-primary text-white px-6 py-2 rounded-lg font-bold hover:shadow-lg transition-all">Get Started</button>
                 </div>
             </div>
             <button onclick="toggleMobileMenu()" class="md:hidden text-primary"><span class="material-symbols-outlined" id="menu-icon">menu</span></button>
@@ -63,75 +100,223 @@
     </nav>
 
     <main>
-        <section class="hero-gradient relative overflow-hidden py-24 md:py-32">
-            <!-- Background Slideshow -->
+        <!-- Hero Section -->
+        <section class="hero-gradient relative overflow-hidden py-24 md:py-40">
             <div id="hero-slideshow" class="absolute inset-0 pointer-events-none">
                 <div class="slideshow-image active" style="background-image: url('images/skyscrapers-sunset.jpg')"></div>
                 <div class="slideshow-image" style="background-image: url('images/DSC_6442.JPG')"></div>
             </div>
             
             <div class="max-w-7xl mx-auto px-8 relative z-10 grid md:grid-cols-12 gap-12 items-center text-white">
-                <div class="md:col-span-7 space-y-8">
-                    <div class="inline-flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+                <div class="md:col-span-7 space-y-10">
+                    <div class="inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full border border-white/20">
                         <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
-                        <span id="hero-badge" class="text-xs font-bold uppercase">MMUST Outreach Initiative</span>
+                        <span id="hero-badge" class="text-[10px] font-black uppercase tracking-[0.2em]">Institutional Initiative</span>
                     </div>
-                    <h1 id="hero-title" class="text-5xl md:text-7xl font-black tracking-tight leading-[1.1]">Empowering Kenyan Schools with a Digital Presence.</h1>
-                    <p id="hero-subtitle" class="text-blue-100 text-xl md:text-2xl font-medium leading-relaxed max-w-2xl">Affordable, professional websites for only KES 5,000/year. Bridging the digital divide across 47 counties.</p>
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <button onclick="location.href='login.html'" class="bg-white text-primary font-bold py-4 px-10 rounded-lg hover:shadow-2xl transition-all text-lg">Incorporate Your School</button>
-                    </div>
-                </div>
-                <div class="md:col-span-5 relative hidden md:block">
-                    <div class="aspect-square bg-white/5 rounded-3xl overflow-hidden backdrop-blur-xl border border-white/10 p-4 transform rotate-3 hover:rotate-0 transition-transform duration-700">
-                        <img id="hero-image" class="w-full h-full object-cover rounded-2xl shadow-inner" src="images/skyscrapers-sunset.jpg"/>
+                    <h1 id="hero-title" class="text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] text-balance">Empowering Kenyan Schools Digitally.</h1>
+                    <p id="hero-subtitle" class="text-blue-100 text-xl md:text-2xl font-medium leading-relaxed max-w-2xl opacity-90">Affordable, professional websites for only KES 5,000/year. Bridging the digital divide across 47 counties.</p>
+                    <div class="flex flex-wrap gap-6 pt-6">
+                        <button onclick="location.href='login.html'" class="bg-secondary text-white font-black py-5 px-12 rounded-2xl hover:shadow-2xl transition-all text-sm uppercase tracking-widest">Incorporate Your School</button>
                     </div>
                 </div>
             </div>
             <div class="absolute -top-24 -right-24 w-96 h-96 bg-secondary/20 blur-[120px] rounded-full"></div>
         </section>
 
-        <section class="py-24 bg-white">
+        <!-- Storytelling Narrative Section -->
+        <section class="py-32 bg-white overflow-hidden relative border-b border-slate-50">
             <div class="max-w-7xl mx-auto px-8">
-                <div class="mb-16 text-center md:text-left">
-                    <h2 class="text-3xl md:text-4xl font-black text-primary tracking-tight uppercase">Featured Schools</h2>
-                    <p id="featured-description" class="text-slate-500 text-lg mt-4">Explore the institutions at the forefront of digital literacy.</p>
+                <div class="text-center max-w-4xl mx-auto mb-24 reveal">
+                    <h2 class="font-headline text-xs font-black uppercase tracking-[0.5em] text-secondary mb-6">The Digital Transformation</h2>
+                    <h3 class="text-4xl md:text-6xl font-black text-primary leading-tight uppercase tracking-tighter text-balance">Your School Belongs in the Digital Kenya – Let’s Get You Online, Worry‑Free</h3>
+                    <p class="mt-8 text-xl md:text-2xl text-slate-500 font-medium leading-relaxed">A website is not extra work. It is your school’s new best friend – secure, simple, and supported.</p>
                 </div>
-                <div id="featured-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
+                    <div class="space-y-10 reveal">
+                        <div class="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 relative group">
+                            <div class="absolute -top-6 -left-6 w-20 h-20 bg-primary text-white rounded-[2rem] flex items-center justify-center shadow-2xl group-hover:bg-secondary transition-all">
+                                <span class="material-symbols-outlined text-3xl">lightbulb</span>
+                            </div>
+                            <h4 class="text-2xl font-black text-primary uppercase tracking-tight mb-6 mt-4 font-headline">Putting Your Mind at Ease</h4>
+                            <div class="space-y-6 text-slate-600 font-medium italic border-l-4 border-secondary/30 pl-8">
+                                <p class="text-lg">“Will a website be too hard to manage?”</p>
+                                <p class="text-lg">“Is it safe?”</p>
+                                <p class="text-lg">“Can we really afford it?”</p>
+                            </div>
+                            <p class="mt-8 text-primary font-black uppercase text-xs tracking-widest">We are here to answer every concern.</p>
+                        </div>
+                        
+                        <div class="prose prose-slate lg:prose-xl text-slate-600 font-medium leading-relaxed">
+                            <p>Today, Kenya is racing toward a fully digital future. The government’s <strong>Digital Economy Blueprint</strong> and the new <strong>CBC curriculum</strong> expect every school to offer online resources, digital records, and a safe window for parents.</p>
+                            <p>A website is no longer a luxury – it is a quiet, powerful tool that works behind the scenes to protect your school, lift your reputation, and lighten your load.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal" style="transition-delay: 0.2s">
+                        <!-- Protection -->
+                        <div class="story-card bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                            <div class="w-14 h-14 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined font-black">shield_person</span>
+                            </div>
+                            <h5 class="text-lg font-black text-primary uppercase tracking-tight mb-4 leading-none font-headline">Protection</h5>
+                            <p class="text-sm text-slate-500 font-medium leading-relaxed">Your records live safely in the cloud – always there when you need them. No more lost documents.</p>
+                        </div>
+                        <!-- Security -->
+                        <div class="story-card bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                            <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined font-black">verified_user</span>
+                            </div>
+                            <h5 class="text-lg font-black text-primary uppercase tracking-tight mb-4 leading-none font-headline">Security</h5>
+                            <p class="text-sm text-slate-500 font-medium leading-relaxed">Fake announcements disappear when your school has one official website that everyone trusts.</p>
+                        </div>
+                        <!-- Visibility -->
+                        <div class="story-card bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                            <div class="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined font-black">door_open</span>
+                            </div>
+                            <h5 class="text-lg font-black text-primary uppercase tracking-tight mb-4 leading-none font-headline">Visibility</h5>
+                            <p class="text-sm text-slate-500 font-medium leading-relaxed">Alumni and sponsors can finally see your school’s needs and achievements from anywhere globally.</p>
+                        </div>
+                        <!-- Support -->
+                        <div class="story-card bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm">
+                            <div class="w-14 h-14 bg-secondary/10 text-secondary rounded-2xl flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined font-black">handshake</span>
+                            </div>
+                            <h5 class="text-lg font-black text-primary uppercase tracking-tight mb-4 leading-none font-headline">Support</h5>
+                            <p class="text-sm text-slate-500 font-medium leading-relaxed">Our dedicated webmasters from the Society of Webmasters do the heavy lifting for you.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High-Impact CTA -->
+                <div class="max-w-5xl mx-auto reveal" style="transition-delay: 0.3s">
+                    <div class="p-12 md:p-20 bg-primary rounded-[4rem] text-white relative overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,32,69,0.3)]">
+                        <div class="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+                            <div class="space-y-8">
+                                <div class="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-black uppercase tracking-[0.3em]">Institutional Grade</div>
+                                <h3 class="text-4xl font-black uppercase tracking-tighter leading-[1.1] font-headline">Start for as little as KES 5,000 per year.</h3>
+                                <p class="text-blue-100 text-lg font-medium leading-relaxed opacity-80 italic">“That is less than the cost of a single school desk – but it elevates your entire institution.”</p>
+                            </div>
+                            <div class="space-y-8">
+                                <p class="text-blue-200 text-sm font-medium leading-relaxed">Let us walk this simple path together – one website, one success story at a time. We will hold your hand through every step.</p>
+                                <button onclick="location.href='login.html'" class="w-full bg-secondary text-white font-black py-6 rounded-2xl hover:scale-105 transition-all text-xs uppercase tracking-[0.3em] shadow-2xl">Get Started Today</button>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+                        <div class="absolute -top-24 -left-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Schools Section -->
+        <section class="py-32 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-8">
+                <div class="mb-20 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-8">
+                    <div class="space-y-4">
+                        <h2 class="font-headline text-xs font-black uppercase tracking-[0.5em] text-secondary">Institutional Registry</h2>
+                        <h3 class="text-4xl md:text-5xl font-black text-primary tracking-tighter uppercase font-headline">Featured Schools</h3>
+                    </div>
+                    <p id="featured-description" class="text-slate-500 text-lg font-medium max-w-md">Explore the institutions at the forefront of digital literacy and innovation.</p>
+                </div>
+                <div id="featured-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     <!-- Dynamic Featured Schools -->
                 </div>
             </div>
         </section>
 
-        <section class="py-24 bg-primary text-white relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-8 relative z-10 text-center space-y-8">
-                <h2 class="text-4xl md:text-6xl font-black tracking-tight leading-tight">Ready to showcase your school?</h2>
-                <p class="text-blue-100 text-xl max-w-2xl mx-auto font-medium">Join over 150 institutions already benefiting from professional visibility. Get online today.</p>
-                <div class="pt-4">
-                    <button onclick="location.href='login.html'" class="bg-secondary text-white font-black py-5 px-12 rounded-2xl hover:shadow-2xl transition-all text-lg uppercase tracking-widest">Register Now</button>
+        <!-- Partners Section -->
+        <section class="py-24 bg-white border-y border-slate-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-8 mb-12">
+                <p class="text-center text-slate-400 font-black uppercase text-[10px] tracking-[0.4em]">Strategic Partnerships</p>
+            </div>
+            <div class="relative">
+                <div class="carousel-track flex items-center gap-24 py-4">
+                    <!-- Repeat logos for infinite scroll -->
+                    <a href="https://mmust.ac.ke/" target="_blank"><img src="logo/mmust.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="MMUST"></a>
+                    <a href="https://konza.go.ke/" target="_blank"><img src="logo/kotda.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="KoTDA"></a>
+                    <a href="https://www.education.go.ke" target="_blank"><img src="logo/ministry (2).png" class="h-20 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="Ministry of Education"></a>
+                    <a href="https://www.ict.go.ke/" target="_blank"><img src="logo/kotda.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="Ministry of ICT"></a>
+                    <!-- Duplicate for seamless loop -->
+                    <a href="https://mmust.ac.ke/" target="_blank"><img src="logo/mmust.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="MMUST"></a>
+                    <a href="https://konza.go.ke/" target="_blank"><img src="logo/kotda.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="KoTDA"></a>
+                    <a href="https://www.education.go.ke" target="_blank"><img src="logo/ministry (2).png" class="h-20 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="Ministry of Education"></a>
+                    <a href="https://www.ict.go.ke/" target="_blank"><img src="logo/kotda.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="Ministry of ICT"></a>
+                    <!-- More duplicates for width -->
+                    <a href="https://mmust.ac.ke/" target="_blank"><img src="logo/mmust.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="MMUST"></a>
+                    <a href="https://konza.go.ke/" target="_blank"><img src="logo/kotda.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="KoTDA"></a>
+                    <a href="https://www.education.go.ke" target="_blank"><img src="logo/ministry (2).png" class="h-20 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="Ministry of Education"></a>
+                    <a href="https://www.ict.go.ke/" target="_blank"><img src="logo/kotda.png" class="h-16 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all" alt="Ministry of ICT"></a>
                 </div>
             </div>
-            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="py-32 bg-primary text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-8 relative z-10 text-center space-y-10">
+                <h2 class="text-4xl md:text-7xl font-black tracking-tighter leading-tight uppercase text-balance font-headline">Ready to showcase your school to the world?</h2>
+                <p class="text-blue-100 text-xl md:text-2xl max-w-3xl mx-auto font-medium opacity-90">Join over 150 institutions already benefiting from professional visibility. Get online today.</p>
+                <div class="pt-8">
+                    <button onclick="location.href='login.html'" class="bg-secondary text-white font-black py-6 px-16 rounded-2xl hover:shadow-2xl hover:scale-105 transition-all text-sm uppercase tracking-widest">Start Registration</button>
+                </div>
+            </div>
+            <div class="absolute -bottom-24 -right-24 w-[30rem] h-[30rem] bg-white/5 rounded-full blur-[100px]"></div>
         </section>
     </main>
 
-    <footer class="bg-white py-16 px-8 border-t border-slate-100">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div class="space-y-6">
-                <img src="logo/logo.png" alt="TOVUTISHA" class="h-10 w-auto">
-                <p class="text-slate-500 text-sm font-medium leading-relaxed max-w-xs">An MMUST Outreach Initiative dedicated to bridging the digital divide in Kenyan education.</p>
+    <footer class="bg-slate-900 py-24 px-8 border-t border-white/5 text-slate-300">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16">
+            <div class="md:col-span-4 space-y-8">
+                <img src="logo/logo.png" alt="TOVUTISHA" class="h-12 w-auto brightness-0 invert opacity-90">
+                <p class="text-slate-400 text-lg leading-relaxed font-medium">Dedicated to the digital transformation of Kenyan education landscapes through professional, institutional-grade web presence.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary transition-all"><span class="material-symbols-outlined text-sm">share</span></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary transition-all"><span class="material-symbols-outlined text-sm">mail</span></a>
+                </div>
             </div>
-            <div class="space-y-6">
-                <h4 class="text-[10px] font-black uppercase tracking-widest text-primary">Quick Navigation</h4>
-                <nav class="flex flex-col space-y-4 text-xs font-black uppercase tracking-widest text-slate-400">
-                    <a class="hover:text-primary transition-colors" href="index.html">Home</a>
-                    <a class="hover:text-primary transition-colors" href="schools.html">Schools Directory</a>
-                    <a class="hover:text-primary transition-colors" href="privacy.html">Privacy Policy</a>
-                    <a class="hover:text-primary transition-colors" href="terms.html">Terms of Service</a>
+            
+            <div class="md:col-span-2 space-y-8">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-white">Platform</h4>
+                <nav class="flex flex-col space-y-4 text-sm font-medium">
+                    <a class="hover:text-secondary transition-colors" href="index.html">Home Dashboard</a>
+                    <a class="hover:text-secondary transition-colors" href="schools.html">School Registry</a>
+                    <a class="hover:text-secondary transition-colors" href="about.html">The Initiative</a>
+                    <a class="hover:text-secondary transition-colors" href="login.html">Portal Access</a>
                 </nav>
             </div>
-            <div class="space-y-6 text-right">
-                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-300">© 2024 TOVUTISHA. ALL RIGHTS RESERVED.</p>
+
+            <div class="md:col-span-3 space-y-8">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-white">Our Partners</h4>
+                <div class="grid grid-cols-1 gap-4 text-sm font-medium">
+                    <a href="https://mmust.ac.ke/" target="_blank" class="hover:text-secondary transition-colors flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> MMUST
+                    </a>
+                    <a href="https://www.education.go.ke" target="_blank" class="hover:text-secondary transition-colors flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Ministry of Education
+                    </a>
+                    <a href="https://www.ict.go.ke/" target="_blank" class="hover:text-secondary transition-colors flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Ministry of ICT
+                    </a>
+                    <a href="https://konza.go.ke/" target="_blank" class="hover:text-secondary transition-colors flex items-center gap-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> KoTDA (Konza Technopolis)
+                    </a>
+                </div>
+            </div>
+
+            <div class="md:col-span-3 space-y-8">
+                <h4 class="text-[11px] font-black uppercase tracking-[0.4em] text-white">Legal Framework</h4>
+                <nav class="flex flex-col space-y-4 text-sm font-medium">
+                    <a class="hover:text-secondary transition-colors" href="privacy.html">Privacy Policy</a>
+                    <a class="hover:text-secondary transition-colors" href="terms.html">Terms of Service</a>
+                </nav>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500">© 2024 TOVUTISHA. ALL RIGHTS RESERVED.</p>
+            <div class="flex gap-8 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <span>Vision 2030 Aligned</span>
+                <span>Government Certified</span>
             </div>
         </div>
     </footer>
@@ -146,6 +331,15 @@
             menu.classList.toggle('hidden');
             icon.innerText = menu.classList.contains('hidden') ? 'menu' : 'close';
         };
+
+        // Entrance Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
         // Hero Slideshow Logic
         const slides = document.querySelectorAll('.slideshow-image');
@@ -173,19 +367,19 @@
                 grid.innerHTML = snap.docs.map(doc => {
                     const s = doc.data();
                     return `
-                    <div class="bg-slate-50 rounded-2xl overflow-hidden group hover:shadow-xl transition-all duration-500 border border-slate-100 flex flex-col">
-                        <div class="h-48 relative overflow-hidden shrink-0">
-                            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${s.photo || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
-                            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
-                            <div class="absolute bottom-6 left-6">
-                                <span class="text-white font-black text-lg tracking-tight uppercase">${s.name}</span>
-                                <div class="text-blue-200 text-[9px] font-black uppercase tracking-widest mt-1">${s.curriculum} EXCELLENCE</div>
+                    <div class="bg-white rounded-[2.5rem] overflow-hidden group hover:shadow-2xl transition-all duration-500 border border-slate-100 flex flex-col shadow-sm">
+                        <div class="h-56 relative overflow-hidden shrink-0">
+                            <img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="${s.photo || 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800'}">
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent border-b-8 border-secondary opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                            <div class="absolute bottom-8 left-8">
+                                <span class="text-white font-black text-2xl tracking-tighter uppercase leading-none block font-headline">${s.name}</span>
+                                <div class="text-blue-300 text-[9px] font-black uppercase tracking-[0.3em] mt-3 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full inline-block font-body">${s.curriculum} EXCELLENCE</div>
                             </div>
                         </div>
-                        <div class="p-8 flex-1 flex flex-col">
-                            <p class="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3 font-medium">${s.excellence || ''}</p>
-                            <a href="school-template.html" class="mt-auto inline-flex items-center text-secondary font-black text-[10px] uppercase tracking-widest hover:gap-2 transition-all">
-                                View Portal <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+                        <div class="p-10 flex-1 flex flex-col bg-white">
+                            <p class="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3 font-medium opacity-80 font-body">${s.excellence || 'Institutional excellence and digital transformation at the core.'}</p>
+                            <a href="school-template.html" class="mt-auto inline-flex items-center text-secondary font-black text-[10px] uppercase tracking-[0.4em] group-hover:gap-4 transition-all font-body">
+                                Explore Portal <span class="material-symbols-outlined text-sm ml-2">arrow_forward</span>
                             </a>
                         </div>
                     </div>`;
